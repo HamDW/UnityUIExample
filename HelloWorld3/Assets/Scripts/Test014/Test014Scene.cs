@@ -5,21 +5,21 @@ using UnityEngine.UI;
 
 public class Test014Scene : MonoBehaviour
 {
-    [SerializeField] GameObject m_Sphere;
+    [SerializeField] GameObject m_Sphere = null;
 
-    [SerializeField] Slider m_sliderR;
-    [SerializeField] Slider m_sliderG;
-    [SerializeField] Slider m_sliderB;
-    [SerializeField] Slider m_sliderA;
+    [SerializeField] Slider m_sliderR = null;
+    [SerializeField] Slider m_sliderG = null;
+    [SerializeField] Slider m_sliderB = null;
+    [SerializeField] Slider m_sliderA = null;
 
-    [SerializeField] InputField m_editR;
-    [SerializeField] InputField m_editG;
-    [SerializeField] InputField m_editB;
-    [SerializeField] InputField m_editA;
+    [SerializeField] InputField m_editR = null;
+    [SerializeField] InputField m_editG = null;
+    [SerializeField] InputField m_editB = null;
+    [SerializeField] InputField m_editA = null;
 
 
-    private Material m_SphereMaterial;
-    private Color m_CurColor;
+    private Material m_SphereMaterial = null;
+    private Color m_CurColor = Color.white;
 
     // Start is called before the first frame update
     void Start()

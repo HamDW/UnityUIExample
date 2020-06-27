@@ -29,7 +29,6 @@ public class GameScene : MonoBehaviour
     public void Initialize()
     {
         StartCoroutine("IEnum_ChangeBg", 1.0f);
-        Transform tr;
     }
 
     IEnumerator IEnum_ChangeBg(float fDelay)

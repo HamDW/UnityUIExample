@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class InputFieldTestDlg : MonoBehaviour
 {
-    [SerializeField] Text m_ResultText;
-    [SerializeField] InputField m_InputName;
-    [SerializeField] Button m_btnStart;
+    [SerializeField] Text m_ResultText = null;
+    [SerializeField] InputField m_InputName = null;
+    [SerializeField] Button m_btnStart = null;
 
     // Start is called before the first frame update
     void Start()

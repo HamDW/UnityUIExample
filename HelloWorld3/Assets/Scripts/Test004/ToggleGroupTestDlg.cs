@@ -10,9 +10,9 @@ using UnityEngine.UI;
 
 public class ToggleGroupTestDlg : MonoBehaviour
 {
-    [SerializeField] ToggleGroup m_ToggleGroup;
-    [SerializeField] Text m_txtResult;
-    [SerializeField] Button m_btnResult;
+    [SerializeField] ToggleGroup m_ToggleGroup = null;
+    [SerializeField] Text m_txtResult = null;
+    [SerializeField] Button m_btnResult = null;
     string m_sValue = "";
 
     // Start is called before the first frame update

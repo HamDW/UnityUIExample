@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class ScrollbarTestDlg : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] Text m_txtResult;
-    [SerializeField] Button m_btnResult;
-    [SerializeField] Scrollbar m_scrollbarNum;
+    [SerializeField] Text m_txtResult = null;
+    [SerializeField] Button m_btnResult = null;
+    [SerializeField] Scrollbar m_scrollbarNum = null;
 
 
     // Start is called before the first frame update

@@ -17,8 +17,8 @@ public class CStackBuffer<T> where T : class, new()
     //}
 
     object cs_buffer = new object();
-    Stack<T> pool;
-    int pool_capacity;
+    Stack<T> pool = null;
+    int pool_capacity = 0;
 
     public void initialize(int capacity)
     {

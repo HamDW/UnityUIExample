@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class DropdownTest2Dlg : MonoBehaviour
 {
     public static string[] cCityList = { "서울", "광주", "대전", "부산", "전주" };
-    [SerializeField] Dropdown m_Dropdown;
-    [SerializeField] Text m_txtResult;
-    [SerializeField] Button m_btnResult;
-    [SerializeField] Button m_btnClear;
+    [SerializeField] Dropdown m_Dropdown = null;
+    [SerializeField] Text m_txtResult = null;
+    [SerializeField] Button m_btnResult = null;
+    [SerializeField] Button m_btnClear = null;
 
-    [SerializeField] List<Button> m_Items;
+    //[SerializeField] List<Button> m_Items = null;
 
 
     private List<string> m_listData = new List<string>();

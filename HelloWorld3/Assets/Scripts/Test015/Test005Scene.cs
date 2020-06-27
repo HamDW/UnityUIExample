@@ -8,11 +8,11 @@ public class Test005Scene : MonoBehaviour
     [SerializeField] int m_MaxHP = 100;
     [SerializeField] int m_HPOffsetValue = 100;
     [SerializeField] int m_DamageValue = 10;
-    [SerializeField] Text m_txtValue;
-    [SerializeField] Slider m_HPBar;
-    [SerializeField] Button m_btnStart;
-    [SerializeField] Button m_btnStop;
-    [SerializeField] Button m_btnClear;
+    [SerializeField] Text m_txtValue = null;
+    [SerializeField] Slider m_HPBar = null;
+    [SerializeField] Button m_btnStart = null;
+    [SerializeField] Button m_btnStop = null;
+    [SerializeField] Button m_btnClear = null;
 
     int m_nHPValue = 0;
     int m_nValueType = 0;               // heal = 0 , dot =1 타입

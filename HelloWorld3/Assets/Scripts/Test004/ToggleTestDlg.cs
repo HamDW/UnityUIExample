@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class ToggleTestDlg : MonoBehaviour
 {
-    [SerializeField] Text m_txtResult;
-    [SerializeField] Button m_btnResult;
-    [SerializeField] Toggle m_toggleApple;
-    [SerializeField] Toggle m_togglePear;
-    [SerializeField] Toggle m_toggleOrange;
+    [SerializeField] Text m_txtResult = null;
+    [SerializeField] Button m_btnResult = null;
+    [SerializeField] Toggle m_toggleApple = null;
+    [SerializeField] Toggle m_togglePear = null;
+    [SerializeField] Toggle m_toggleOrange = null;
 
     // Start is called before the first frame update
     void Start()

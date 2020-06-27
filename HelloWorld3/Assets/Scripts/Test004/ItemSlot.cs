@@ -29,6 +29,11 @@ public class ItemSlot : MonoBehaviour
         kImage.color = color;
     }
 
+    public void SetImage(string sName)
+    {
+        m_imgIcon.sprite = Resources.Load("Textures/" + sName) as Sprite;
+    }
+
 
     public void SetSelect( bool bSelect )
     {

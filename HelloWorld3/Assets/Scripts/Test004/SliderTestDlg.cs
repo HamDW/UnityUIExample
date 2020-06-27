@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class SliderTestDlg : MonoBehaviour
 {
-    [SerializeField] Text m_txtResult;
-    [SerializeField] Button m_btnResult;
-    [SerializeField] Slider m_sliderNum;
+    [SerializeField] Text m_txtResult = null;
+    [SerializeField] Button m_btnResult = null;
+    [SerializeField] Slider m_sliderNum = null;
 
     [SerializeField] int m_MinValue = 0;        // 초기값 설정 연습
     [SerializeField] int m_MaxValue = 1;
