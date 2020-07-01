@@ -1,34 +1,46 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DropdownTest2Dlg : MonoBehaviour
 {
-    public static string[] cCityList = { "서울", "광주", "대전", "부산", "전주" };
+    //public static string[] cCityList = { "서울", "광주", "대전", "부산", "전주" };
     [SerializeField] Dropdown m_Dropdown = null;
     [SerializeField] Text m_txtResult = null;
     [SerializeField] Button m_btnResult = null;
     [SerializeField] Button m_btnClear = null;
 
-    //[SerializeField] List<Button> m_Items = null;
-
-
     private List<string> m_listData = new List<string>();
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        m_Dropdown.onValueChanged.AddListener(delegate {
-            OnValueChanged_CityList(m_Dropdown);
+        m_Dropdown.onValueChanged.AddListener(delegate (int index)
+        {
+            OnValueChanged_CityList(index);
         });
+
+        //m_Dropdown.onValueChanged.AddListener((int index) =>
+        //{
+        //    //string sCity = m_listData[index];
+        //    //m_txtResult.text = index + " : " + sCity;
+        //    OnValueChanged_CityList(index);
+        //});
+
         m_btnResult.onClick.AddListener(OnClicked_Result);
         m_btnClear.onClick.AddListener(OnClicked_Clear);
 
-        Initialize1();
+        Initialize();
     }
 
-    private void Initialize1()
+
+
+
+    private void Initialize()
     {
         m_listData.Add("서울");
         m_listData.Add("광주");
@@ -39,12 +51,19 @@ public class DropdownTest2Dlg : MonoBehaviour
         m_Dropdown.AddOptions(m_listData);
     }
 
-    public void OnValueChanged_CityList(Dropdown kDropdown)
+    public void OnValueChanged_CityList(int index)
     {
-        int nPos = kDropdown.value;
-        string sCity = m_listData[nPos];
+        string sCity = m_listData[index];
+        m_txtResult.text = index + " : " + sCity;
 
-        m_txtResult.text = nPos + " : " + sCity;
+    }
+
+
+    public void OnValueChanged_CityList2()
+    {
+        int index = m_Dropdown.value;
+        string sCity = m_listData[index];
+        m_txtResult.text = index + " : " + sCity;
     }
 
 

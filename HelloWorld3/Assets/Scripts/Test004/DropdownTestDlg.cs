@@ -19,19 +19,26 @@ public class DropdownTestDlg : MonoBehaviour
         m_btnResult.onClick.AddListener(OnClicked_Result);
         m_btnClear.onClick.AddListener(OnClicked_Clear);
 
-        m_Dropdown.onValueChanged.AddListener(delegate {
-            OnValueChanged_CityList(m_Dropdown);
+        m_Dropdown.onValueChanged.AddListener(delegate (int index)
+        {
+            OnValueChanged_CityList(index);
         });
+
+        //m_Dropdown.onValueChanged.AddListener( (int index) => {
+        //    OnValueChanged_CityList(index);
+        //});
+
     }
 
 
-    public void OnValueChanged_CityList(Dropdown kDropdown)
+
+    public void OnValueChanged_CityList(int index)
     {
-        int nPos = kDropdown.value;
-        string sCity = cCityList[nPos];
-
-        m_txtResult.text = nPos + " : " + sCity;
+        string sCity = cCityList[index];
+        m_txtResult.text = index + " : " + sCity;
     }
+
+
 
 
     public void OnClicked_Result()
