@@ -19,17 +19,14 @@ public class DropdownTest2Dlg : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //m_Dropdown.onValueChanged.AddListener((int index) =>
+        //{
+        //    OnValueChanged_CityList(index);
+        //});
         m_Dropdown.onValueChanged.AddListener(delegate (int index)
         {
             OnValueChanged_CityList(index);
         });
-
-        //m_Dropdown.onValueChanged.AddListener((int index) =>
-        //{
-        //    //string sCity = m_listData[index];
-        //    //m_txtResult.text = index + " : " + sCity;
-        //    OnValueChanged_CityList(index);
-        //});
 
         m_btnResult.onClick.AddListener(OnClicked_Result);
         m_btnClear.onClick.AddListener(OnClicked_Clear);
@@ -71,7 +68,7 @@ public class DropdownTest2Dlg : MonoBehaviour
     {
         int nPos = m_Dropdown.value;
         string sCity = m_listData[nPos];
-        string sResult = "당신이 이동할 도시는 " + sCity + "입니다. ";
+        string sResult = "당신이 이동할 도시는<Color=#ff0000ff> " + sCity + "</Color>입니다. ";
         m_txtResult.text = sResult;
     }
 
