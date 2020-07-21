@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//public interface IActor
-//{
-//    public void Initialize();
-//}
-    
-
-
+/*
+ * 
+ * 
+ *  상속 연습하기
+ * 
+ * 
+ */
 
 
 public class Actor 
@@ -21,13 +21,12 @@ public class Actor
 
     }
 
-    public virtual void Initialize() {
+    public virtual void Initialize() 
+    {
         m_HP = 100;
     }
 
-    public virtual void SetDamage(int nAttack )    {
-        
-    }
+    public virtual void SetDamage(int nAttack)   {   }
 }
 
 
@@ -36,9 +35,7 @@ public class Master : Actor
     public int m_MP;
 
     // 생성자
-    public Master() {   
-    
-    }
+    public Master() {  }
 
     public override void Initialize()
     {

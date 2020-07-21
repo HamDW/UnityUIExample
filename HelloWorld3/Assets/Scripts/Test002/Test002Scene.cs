@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestAScene : MonoBehaviour
+public class Test002Scene : MonoBehaviour
 {
     public GameObject m_Qube;
     public Rigidbody m_QubeRigidBody;
@@ -86,30 +86,38 @@ public class TestAScene : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            Vector3 vPos = m_Qube.transform.localPosition;
-            vPos.x -= 0.5f;
-            m_Qube.transform.localPosition = vPos;
+            Vector3 vPos = m_Qube.transform.position;
+            vPos.x -= 0.05f;
+            m_Qube.transform.position = vPos;
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            Vector3 vPos = m_Qube.transform.localPosition;
-            vPos.x += 0.01f;
-            m_Qube.transform.localPosition = vPos;
+            Vector3 vPos = m_Qube.transform.position;
+            vPos.x += 0.05f;
+            m_Qube.transform.position = vPos;
         }
     }
 
 
     private void Update_Move2()
     {
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            m_Qube.transform.Translate(0, 0, 0.05f, Space.World);
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            m_Qube.transform.Translate(0, 0, -0.05f, Space.World);
+        }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            m_Qube.transform.Translate(-0.1f, 0, 0);
+            m_Qube.transform.Translate(-0.05f, 0, 0, Space.World);
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            m_Qube.transform.Translate(0.1f, 0, 0, Space.Self);
-            //m_Hello.transform.Translate(0.1f, 0, 0, Space.World);
+            m_Qube.transform.Translate(0.05f, 0, 0, Space.World);
+            //m_Hello.transform.Translate(0.1f, 0, 0, Space.Self);
         }
     }
 
@@ -163,9 +171,6 @@ public class TestAScene : MonoBehaviour
         float ySpeed = yDelta * fSpeed;
 
         Vector3 newVelocity = new Vector3(xSpeed, 0, ySpeed);
-
-
-        //Rigidbody kRigidbody = m_Qube.GetComponent<Rigidbody>();
 
         // 리지드바디의 속도에 할당
         m_QubeRigidBody.velocity = newVelocity;

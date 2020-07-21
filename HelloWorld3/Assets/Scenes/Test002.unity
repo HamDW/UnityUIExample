@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Qube: {fileID: 587486552}
-  m_QubeRigidBody: {fileID: 0}
+  m_QubeRigidBody: {fileID: 587486557}
 --- !u!1 &587486552
 GameObject:
   m_ObjectHideFlags: 0

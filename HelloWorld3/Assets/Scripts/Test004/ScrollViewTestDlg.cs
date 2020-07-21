@@ -17,6 +17,7 @@ using UnityEngine.UI;
  */
 
 public class ScrollViewTestDlg : MonoBehaviour
+
 {
     
     public static string[] cCityList = { "서울", "광주", "대전", "부산", "전주", "대구", "인천" };
@@ -37,7 +38,8 @@ public class ScrollViewTestDlg : MonoBehaviour
         m_btnResult.onClick.AddListener(OnClicked_Result);
         m_btnClear.onClick.AddListener(OnClicked_Clear);
 
-        //m_ScrollRect.onValueChanged.AddListener( (Vector2 value) =>{
+        //m_ScrollRect.onValueChanged.AddListener((Vector2 value) =>
+        //{
         //    OnValueChanged_CityList(value);
         //});
 
@@ -92,12 +94,10 @@ public class ScrollViewTestDlg : MonoBehaviour
     }
 
 
-
     //public void OnValueChanged_CityList(Vector2 value)
     //{
     //    //Debug.Log("Scroll Pos = " + value.x + ", " + value.y);
     //}
-
 
 
     public void OnClicked_Result()
