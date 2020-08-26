@@ -28,6 +28,9 @@ public class GameScene : MonoBehaviour
 
     public void Initialize()
     {
+        if (m_Sprites.Length == 0)
+            return;
+
         StartCoroutine("IEnum_ChangeBg", 1.0f);
     }
 

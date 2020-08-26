@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,37 +6,26 @@ using UnityEngine.UI;
 public class DropdownTest2Dlg : MonoBehaviour
 {
     //public static string[] cCityList = { "서울", "광주", "대전", "부산", "전주" };
-    [SerializeField] Dropdown m_Dropdown = null;
-    [SerializeField] Text m_txtResult = null;
-    [SerializeField] Button m_btnResult = null;
-    [SerializeField] Button m_btnClear = null;
+    [SerializeField] Dropdown m_Dropdown;
+    [SerializeField] Text m_txtResult;
+    [SerializeField] Button m_btnResult;
+    [SerializeField] Button m_btnClear;
 
     private List<string> m_listData = new List<string>();
-
-    
 
     // Start is called before the first frame update
     void Start()
     {
-        //m_Dropdown.onValueChanged.AddListener((int index) =>
-        //{
-        //    OnValueChanged_CityList(index);
-        //});
-        m_Dropdown.onValueChanged.AddListener(delegate (int index)
-        {
-            OnValueChanged_CityList(index);
+        m_Dropdown.onValueChanged.AddListener(delegate {
+            OnValueChanged_CityList(m_Dropdown);
         });
-
         m_btnResult.onClick.AddListener(OnClicked_Result);
         m_btnClear.onClick.AddListener(OnClicked_Clear);
 
-        Initialize();
+        Initialize1();
     }
 
-
-
-
-    private void Initialize()
+    private void Initialize1()
     {
         m_listData.Add("서울");
         m_listData.Add("광주");
@@ -48,19 +36,12 @@ public class DropdownTest2Dlg : MonoBehaviour
         m_Dropdown.AddOptions(m_listData);
     }
 
-    public void OnValueChanged_CityList(int index)
+    public void OnValueChanged_CityList(Dropdown kDropdown)
     {
-        string sCity = m_listData[index];
-        m_txtResult.text = index + " : " + sCity;
+        int nPos = kDropdown.value;
+        string sCity = m_listData[nPos];
 
-    }
-
-
-    public void OnValueChanged_CityList2()
-    {
-        int index = m_Dropdown.value;
-        string sCity = m_listData[index];
-        m_txtResult.text = index + " : " + sCity;
+        m_txtResult.text = nPos + " : " + sCity;
     }
 
 
@@ -68,7 +49,7 @@ public class DropdownTest2Dlg : MonoBehaviour
     {
         int nPos = m_Dropdown.value;
         string sCity = m_listData[nPos];
-        string sResult = "당신이 이동할 도시는<Color=#ff0000ff> " + sCity + "</Color>입니다. ";
+        string sResult = "당신이 이동할 도시는 " + sCity + "입니다. ";
         m_txtResult.text = sResult;
     }
 

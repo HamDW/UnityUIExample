@@ -7,10 +7,10 @@ using UnityEngine.UI;
 public class DropdownTestDlg : MonoBehaviour
 {
     public static string[] cCityList = { "서울", "광주", "대전", "부산", "전주" };
-    [SerializeField] Dropdown m_Dropdown = null;
-    [SerializeField] Text m_txtResult = null;
-    [SerializeField] Button m_btnResult = null;
-    [SerializeField] Button m_btnClear = null;
+    [SerializeField] Dropdown m_Dropdown;
+    [SerializeField] Text m_txtResult;
+    [SerializeField] Button m_btnResult;
+    [SerializeField] Button m_btnClear;
 
 
     // Start is called before the first frame update
@@ -19,26 +19,19 @@ public class DropdownTestDlg : MonoBehaviour
         m_btnResult.onClick.AddListener(OnClicked_Result);
         m_btnClear.onClick.AddListener(OnClicked_Clear);
 
-        m_Dropdown.onValueChanged.AddListener(delegate (int index)
-        {
-            OnValueChanged_CityList(index);
+        m_Dropdown.onValueChanged.AddListener(delegate {
+            OnValueChanged_CityList(m_Dropdown);
         });
-
-        //m_Dropdown.onValueChanged.AddListener( (int index) => {
-        //    OnValueChanged_CityList(index);
-        //});
-
     }
 
 
-
-    public void OnValueChanged_CityList(int index)
+    public void OnValueChanged_CityList(Dropdown kDropdown)
     {
-        string sCity = cCityList[index];
-        m_txtResult.text = index + " : " + sCity;
+        int nPos = kDropdown.value;
+        string sCity = cCityList[nPos];
+
+        m_txtResult.text = nPos + " : " + sCity;
     }
-
-
 
 
     public void OnClicked_Result()
