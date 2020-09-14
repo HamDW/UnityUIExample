@@ -293,7 +293,6 @@ public class Test003Secne : MonoBehaviour
 
     }
 
-
     // 1. 변수
     // 2. 함수 개념잡기
     // 3. 제어문
@@ -301,8 +300,7 @@ public class Test003Secne : MonoBehaviour
     // 5. 배열
     // 6. collection
     // 7. 클래스
-
-}
+    }
 
 
 public class Animal
