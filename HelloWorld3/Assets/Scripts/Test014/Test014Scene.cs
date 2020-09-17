@@ -25,9 +25,6 @@ public class Test014Scene : MonoBehaviour
     void Start()
     {
         MeshRenderer kRenderer = m_Sphere.GetComponent<MeshRenderer>();
-        //Material kMat = new Material(Shader.Find("Diffuse"));
-        //kRenderer.material = kMat;
-
         m_SphereMaterial = kRenderer.material;
 
         InitSlider();
@@ -49,8 +46,6 @@ public class Test014Scene : MonoBehaviour
         m_sliderG.value = 1;
         m_sliderB.value = 1;
         m_sliderA.value = 1;
-
-        m_CurColor = Color.white;
     }
 
 

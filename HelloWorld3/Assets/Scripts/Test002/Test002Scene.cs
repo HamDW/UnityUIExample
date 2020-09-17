@@ -57,7 +57,7 @@ public class Test002Scene : MonoBehaviour
     {
         Update_Scale();
         Update_Move4();
-        Update_Rotate2();
+        Update_Rotate1();
     }
 
 
@@ -142,9 +142,12 @@ public class Test002Scene : MonoBehaviour
         if (Input.GetKey(KeyCode.T))
         {
             float fValue = 5.0f;
-            Vector3 vRot = m_Qube.transform.localEulerAngles;
+            Vector3 vRot = m_Qube.transform.eulerAngles;
              vRot.z += fValue;
-            m_Qube.transform.localEulerAngles = vRot;
+            
+            m_Qube.transform.rotation = Quaternion.Euler(vRot);
+
+            //m_Qube.transform.localEulerAngles = vRot;
         }
     }
 
@@ -156,7 +159,6 @@ public class Test002Scene : MonoBehaviour
             m_Qube.transform.Rotate(fValue, 0, 0);
         }
     }
-
 
 
     private void Update_Move4()

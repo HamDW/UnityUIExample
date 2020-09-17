@@ -7,10 +7,10 @@ using UnityEngine.UI;
 public class DropdownTestDlg : MonoBehaviour
 {
     public static string[] cCityList = { "서울", "광주", "대전", "부산", "전주" };
-    [SerializeField] Dropdown m_Dropdown;
-    [SerializeField] Text m_txtResult;
-    [SerializeField] Button m_btnResult;
-    [SerializeField] Button m_btnClear;
+    [SerializeField] Dropdown m_Dropdown = null;
+    [SerializeField] Text m_txtResult = null;
+    [SerializeField] Button m_btnResult = null;
+    [SerializeField] Button m_btnClear = null;
 
 
     // Start is called before the first frame update

@@ -78,7 +78,6 @@ public class ScrollViewTestDlg : MonoBehaviour
         kItem.SetSelect(true);
 
         m_iSelectIndex = iIndex;
-
         m_txtResult.text = cCityList[iIndex];
         
         string sLog = string.Format(" Select Index = {0}", iIndex);

@@ -45,29 +45,46 @@ public class HpBarTestDlg : MonoBehaviour
         {
             yield return new WaitForSeconds(fDelay);
 
-            if (m_nValueType == 0)
-            {
-                m_nHPValue -= m_DamageValue;
-                if (m_nHPValue <= 0)
-                {
-                    m_nHPValue = 0;
-                    m_bStart = false;
-                }
-            }
-            else
-            {
-                m_nHPValue += m_DamageValue;
-                if (m_nHPValue >= m_MaxHP)
-                {
-                    m_nHPValue = m_MaxHP;
-                    m_bStart = false;
-                }
-            }
-            PrintHPValue();
-            m_HPBar.value = m_nHPValue;
-        }
+            CalculateHP();
+          }
 
         yield return null;
+    }
+
+    public void CalculateHP()
+    {
+        if (m_nValueType == 0)
+        {
+            Calculate_Dot();
+        }
+        else
+        {
+            Calculate_Healing();
+        }
+    }
+
+    public void Calculate_Dot()
+    {
+        m_nHPValue -= m_DamageValue;
+        if (m_nHPValue <= 0)
+        {
+            m_nHPValue = 0;
+            m_bStart = false;
+        }
+        PrintHPValue();
+        m_HPBar.value = m_nHPValue;
+    }
+
+    public void Calculate_Healing()
+    {
+        m_nHPValue += m_DamageValue;
+        if (m_nHPValue >= m_MaxHP)
+        {
+            m_nHPValue = m_MaxHP;
+            m_bStart = false;
+        }
+        PrintHPValue();
+        m_HPBar.value = m_nHPValue;
     }
 
 
