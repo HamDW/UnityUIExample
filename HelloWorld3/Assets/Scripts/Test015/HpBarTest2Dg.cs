@@ -49,7 +49,6 @@ public class HpBarTest2Dg : MonoBehaviour
     {
         if (m_bStart)
         {
-            m_fCurTime += Time.deltaTime;
             if (m_nValueType == 0)
                 Update_Dot();
             else
@@ -60,15 +59,18 @@ public class HpBarTest2Dg : MonoBehaviour
     // 독 데미지
     private void Update_Dot()
     {
+        m_fCurTime += Time.deltaTime;
+
         if (m_fCurTime >= m_DotDelayTime)
         {
+            m_fCurTime = 0;
+
             m_nHPValue -= m_DamageValue;
             if (m_nHPValue <= 0)
             {
                 m_nHPValue = 0;
                 m_bStart = false;
             }
-            m_fCurTime = 0;
 
             PrintHPValue();
             m_HPBar.value = m_nHPValue;
@@ -78,17 +80,19 @@ public class HpBarTest2Dg : MonoBehaviour
     // 힐링
     private void Update_Healing()
     {
+        m_fCurTime += Time.deltaTime;
+
         if (m_fCurTime >= m_HealDelayTime)
         {
+            m_fCurTime = 0;
+
             m_nHPValue += m_HealingValue;
             if (m_nHPValue >= m_MaxHP)
             {
                 m_nHPValue = m_MaxHP;
                 m_bStart = false;
             }
-            m_fCurTime = 0;
         }
-
         PrintHPValue();
         m_HPBar.value = m_nHPValue;
     }

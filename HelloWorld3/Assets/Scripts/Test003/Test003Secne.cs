@@ -196,12 +196,32 @@ public class Test003Secne : MonoBehaviour
         aTemp[1] = 200;
         aTemp[2] = 300;
 
-
+        // for 문
         for( int i = 0; i < aTemp.Length; i++ )
         {
             string sLog = string.Format("Temp[{0}] = {1}", i, aTemp[i]);
             Debug.Log(sLog);
         }
+
+        // while 문
+        int idx = 0;
+        while( idx < aTemp.Length )
+        {
+            string sLog = string.Format("Temp[{0}] = {1}", idx, aTemp[idx]);
+            idx++;
+            Debug.Log(sLog);
+        }
+
+        // do ~ while문 : 적어도 한번은 호출한다.
+        idx = 0;
+        do
+        {
+            string sLog = string.Format("Temp[{0}] = {1}", idx, aTemp[idx]);
+            idx++;
+            Debug.Log(sLog);
+
+        } while (idx < aTemp.Length);
+
     }
 
     public void TestCollection()

@@ -49,31 +49,30 @@ public class Test014Scene : MonoBehaviour
     }
 
 
-
     public void OnSliderChanged_R()
     {
         m_CurColor.r = m_sliderR.value;
         m_SphereMaterial.color = m_CurColor;
-        m_editR.text = "" + (int)(m_CurColor.r * 256); 
+        m_editR.text = "" + (int)(m_CurColor.r * 255); 
     }
 
     public void OnSliderChanged_G()
     {
         m_CurColor.g = m_sliderG.value;
         m_SphereMaterial.color = m_CurColor;
-        m_editG.text = "" + (int)(m_CurColor.g * 256);
+        m_editG.text = "" + (int)(m_CurColor.g * 255);
     }
     public void OnSliderChanged_B()
     {
         m_CurColor.b = m_sliderB.value;
         m_SphereMaterial.color = m_CurColor;
-        m_editB.text = "" + (int)(m_CurColor.b * 256);
+        m_editB.text = "" + (int)(m_CurColor.b * 255);
     }
     public void OnSliderChanged_A()
     {
         m_CurColor.a = m_sliderA.value;
         m_SphereMaterial.color = m_CurColor;
-        m_editA.text = "" + (int)(m_CurColor.a * 256);
+        m_editA.text = "" + (int)(m_CurColor.a * 255);
 
     }
 

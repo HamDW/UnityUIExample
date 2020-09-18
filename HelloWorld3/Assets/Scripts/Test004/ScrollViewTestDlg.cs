@@ -17,7 +17,6 @@ using UnityEngine.UI;
  */
 
 public class ScrollViewTestDlg : MonoBehaviour
-
 {
     
     public static string[] cCityList = { "서울", "광주", "대전", "부산", "전주", "대구", "인천" };
