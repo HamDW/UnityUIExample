@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class HpBarTestDlg : MonoBehaviour
 {
-    [SerializeField] int m_MaxHP = 100;
-    [SerializeField] int m_HPOffsetValue = 100;
-    [SerializeField] int m_DamageValue = 10;
+    [SerializeField] int m_MaxHP = 100;                 // HP 최대값
+    [SerializeField] int m_HPOffsetValue = 100;         // HP 초기값
+    [SerializeField] int m_DamageValue = 10;            // 초당 데미지
+    [SerializeField] int m_HealingValue = 15;           // 초당 회복값당 회복값
+
     [SerializeField] Text m_txtValue = null;
     [SerializeField] Slider m_HPBar = null;
     [SerializeField] Button m_btnStart = null;
@@ -77,7 +79,7 @@ public class HpBarTestDlg : MonoBehaviour
 
     public void Calculate_Healing()
     {
-        m_nHPValue += m_DamageValue;
+        m_nHPValue += m_HealingValue;
         if (m_nHPValue >= m_MaxHP)
         {
             m_nHPValue = m_MaxHP;

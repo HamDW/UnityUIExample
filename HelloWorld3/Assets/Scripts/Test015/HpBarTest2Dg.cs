@@ -69,6 +69,7 @@ public class HpBarTest2Dg : MonoBehaviour
             if (m_nHPValue <= 0)
             {
                 m_nHPValue = 0;
+
                 m_bStart = false;
             }
 
