@@ -2,82 +2,104 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+     *  클래스 테스트 
+     * 
+     *  1. 멤버 변수
+     *  2. 멤버 함수
+     *  3. 기본 생성자
+     * 
+     */
+
+public class Actor
+{
+    // 멤버 변수
+    public int m_HP = 0;           // 체력
+    public int m_Attack = 0;       // 공격력
+
+    // 기본 생성자
+    public Actor()
+    {
+        m_HP = 5000;
+        m_Attack = 100;
+    }
+
+    // 멤버 함수
+    public void SetDamage(int nDamage)
+    {
+        m_HP -= nDamage;
+    }
+
+    public void AddHP(int nValue)
+    {
+        m_HP += nValue;
+    }
+
+    // 생성자 오버로드
+    //public Actor(int hp, int attack)
+    //{
+    //    m_HP = hp;
+    //    m_Attack = attack;
+    //}
+}
+
 
 /*
+ *  클래스 테스트 
  * 
- * 
- *  상속 연습하기
- * 
+ *  1. 멤버 변수
+ *  2. 멤버 함수
+ *  3. 기본 생성자
+ *  4. 생성자 오버로드
+ *  5. 프로퍼티
+ *  6. 접근자 ( public, protected, private )
  * 
  */
 
-
-public class Actor 
+public class Actor2
 {
-    public int m_HP = 0;
-    
-    // 생성자
-    public Actor()  {
+    // 멤버 변수
+    private int m_HP = 0;           // 체력
+    private int m_Attack = 0;       // 공격력
 
+
+    // 기본 생성자
+    public Actor2()
+    {
+        m_HP = 5000;
+        m_Attack = 100;
+    }
+    // 생성자 오버로드
+    public Actor2(int nHp, int nAttack)
+    {
+        m_HP = nHp;
+        m_Attack = nAttack;
     }
 
-    public virtual void Initialize() 
+    // 프로퍼티 ( 속성 )
+    public int hp
     {
-        m_HP = 100;
+        get { return m_HP; }
+        set { m_HP = value; }
     }
 
-    public virtual void SetDamage(int nAttack)   {   }
-}
-
-
-public class Master : Actor
-{
-    public int m_MP;
-
-    // 생성자
-    public Master() {  }
-
-    public override void Initialize()
+    // 프로퍼티 ( 속성 )
+    public int attack
     {
-        base.Initialize();
-        m_MP = 100;
-    }
-    public override void SetDamage(int nAttack)
-    {
-        m_HP -= nAttack;
+        get { return m_Attack; }
+        set { m_Attack = value; }
     }
 
 
-}
-
-
-
-public class Monster : Actor
-{
-    public override void Initialize()
+    // 멤버 함수
+    public void SetDamage(int nDamage)
     {
-        base.Initialize();
-
-    }
-    public override void SetDamage(int nAttack)
-    {
-        m_HP -= nAttack;
-    }
-}
-
-
-public class Boss : Actor
-{
-    public override void Initialize()
-    {
-        base.Initialize();
-
+        m_HP -= nDamage;
     }
 
-    // 보스는 데미지를 0.5배만 입는다고 가정할때
-    public override void SetDamage(int nAttack)
+    public void AddHP(int nValue)
     {
-        m_HP -= (int)(nAttack * 0.5f);
+        m_HP += nValue;
     }
 
 }
