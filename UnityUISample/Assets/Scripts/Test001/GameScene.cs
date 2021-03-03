@@ -4,6 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /* 
+ * [ 선행작업 ]
+ * ㅁ. 책 구매
+ * ㅁ. Hierarchy 뷰 트리 만드는 법
+ *    Root 
+ *      - Game
+ *      - HudUI
+ * ㅁ. Project 뷰 폴더
+ *      - Recources
+ *          + Textures
+ *          + Prefabs
+ *          + Materials
+ *          + Animations
+ *      - Scene
+ *      - Scripts
+ * 
+ * ==================================
  * 1. Hello world 출력하기
  * 2. 글자를 좌우 이동하기
  * 3. 글자를 확대 축소하기
@@ -56,40 +72,63 @@ public class GameScene : MonoBehaviour
 
     void Update()
     {
+        Update_Zoom();
+        Update_Rotate1();
+        Update_Move3();
+    }
+
+    public void Update_Zoom()
+    {
         // 확대
-        if( Input.GetMouseButtonUp( 0 ) )
+        if (Input.GetMouseButtonUp(0))
         {
             Vector3 vScale = m_Hello.transform.localScale;
             vScale.x += 0.1f;
             vScale.y += 0.1f;
             m_Hello.transform.localScale = vScale;
-        }    
+        }
 
         // 축소
-        if( Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(1))
         {
             Vector3 vScale = m_Hello.transform.localScale;
             vScale.x -= 0.1f;
             vScale.y -= 0.1f;
             m_Hello.transform.localScale = vScale;
         }
-
-        
-        // 한방향 회전
-        if (Input.GetKey(KeyCode.T))
-        {
-            Vector3 vRot = m_Hello.transform.localEulerAngles;
-            vRot.z += 5.0f;
-            m_Hello.transform.localEulerAngles = vRot;
-            //m_Hello.transform.Rotate(0, 0, 5.0f);
-        }
-
-
-        Update_Move2();
     }
 
 
+    private void Update_Move1()
+    {
+        float fMove = 0.5f;
+        // 좌우 이동
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            Vector3 vPos = m_Hello.transform.position;
+            vPos.x -= fMove;
+            m_Hello.transform.position = vPos;
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            Vector3 vPos = m_Hello.transform.position;
+            vPos.x += fMove;
+            m_Hello.transform.position = vPos;
+        }
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            Vector3 vPos = m_Hello.transform.position;
+            vPos.y += fMove;
+            m_Hello.transform.position = vPos;
+        }
 
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            Vector3 vPos = m_Hello.transform.position;
+            vPos.y -= fMove;
+            m_Hello.transform.position = vPos;
+        }
+    }
 
     private void Update_Move2()
     {
@@ -107,40 +146,66 @@ public class GameScene : MonoBehaviour
 
     }
 
-    private void Update_Move1()
+
+
+    public void Update_Rotate1()
     {
+        // 한방향 회전
+        if (Input.GetKey(KeyCode.T))
+        {
+            Vector3 vRot = m_Hello.transform.localEulerAngles;
+            vRot.z += 5.0f;
+            m_Hello.transform.localEulerAngles = vRot;
+        }
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            Vector3 vRot = m_Hello.transform.localEulerAngles;
+            vRot.z -= 5.0f;
+            m_Hello.transform.localEulerAngles = vRot;
+        }
+    }
+
+    public void Update_Rotate2()
+    {
+        // 한방향 회전
+        if (Input.GetKey(KeyCode.T))
+        {
+            m_Hello.transform.Rotate(0, 0, 5.0f);
+        }
+
+        if (Input.GetKey(KeyCode.R))
+        {
+            m_Hello.transform.Rotate(0, 0, -5.0f);
+        }
+    }
+
+
+
+    private void Update_Move3()
+    {
+        float fMove = 0.5f;
         // 좌우 이동
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            Vector3 vPos = m_Hello.transform.localPosition;
-            vPos.x -= 0.5f;
-            m_Hello.transform.localPosition = vPos;
-            //m_Hello.transform.Translate(-0.1f, 0, 0);         // 디폴트 : 로컬좌표
+            //m_Hello.transform.Translate(-fMove, 0, 0);         // 디폴트 : 로컬좌표
+            m_Hello.transform.Translate(-fMove, 0, 0, Space.World);    // 주의: 월드 좌표로 이동
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            Vector3 vPos = m_Hello.transform.localPosition;
-            vPos.x += 0.5f;
-            m_Hello.transform.localPosition = vPos;
-            //m_Hello.transform.Translate(0.1f, 0, 0, Space.Self);
-            //m_Hello.transform.Translate(0.1f, 0, 0, Space.World);    // 주의: 월드 좌표로 이동
+            //m_Hello.transform.Translate(fMove, 0, 0, Space.Self);
+            m_Hello.transform.Translate(fMove, 0, 0, Space.World);    // 주의: 월드 좌표로 이동
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            Vector3 vPos = m_Hello.transform.localPosition;
-            vPos.y += 0.5f;
-            m_Hello.transform.localPosition = vPos;
-            //m_Hello.transform.Translate(0.1f, 0, 0, Space.Self);
-            //m_Hello.transform.Translate(0.1f, 0, 0, Space.World);    // 주의: 월드 좌표로 이동
+            //m_Hello.transform.Translate(0, fMove, 0, Space.Self);
+            m_Hello.transform.Translate(0, fMove, 0, Space.World);    // 주의: 월드 좌표로 이동
         }
 
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            Vector3 vPos = m_Hello.transform.localPosition;
-            vPos.y -= 0.5f;
-            m_Hello.transform.localPosition = vPos;
-            //m_Hello.transform.Translate(0.1f, 0, 0, Space.Self);
-            //m_Hello.transform.Translate(0.1f, 0, 0, Space.World);    // 주의: 월드 좌표로 이동
+            //m_Hello.transform.Translate(0, -fMove, 0, Space.Self);
+            m_Hello.transform.Translate(0, -fMove, 0, Space.World);    // 주의: 월드 좌표로 이동
         }
     }
 
