@@ -20,10 +20,10 @@ public class TestListDlg : MonoBehaviour
     {
         m_txtResult.text = "";
         
-        TestArray();
+        //TestArray();
         //TestArray2();
         //TestArray3();
-        //TestArray5();
+        TestArray5();
         //TestList();
         //TestList2();
         //TestDictionary();
@@ -120,6 +120,7 @@ public class TestListDlg : MonoBehaviour
 
     private void PrintArray(int[,] arr)
     {
+        int count =  arr.Length;
         for (int i = 0; i < arr.GetLength(0); i++)
         {
             for (int j = 0; j < arr.GetLength(1); j++)

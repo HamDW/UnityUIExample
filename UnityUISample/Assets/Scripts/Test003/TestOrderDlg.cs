@@ -34,30 +34,59 @@ public class TestOrderDlg : MonoBehaviour
         int nValue3 = int.Parse(m_editC.text);
 
         int nMax = FindMaxNumber( nValue1,  nValue2, nValue3);
-        m_txtResult.text = string.Format( "가장 큰 수 = {0}", nMax);
+
+        int[] aOrder = OrderByLarge(nValue1, nValue2, nValue3);
+        
+        m_txtResult.text = string.Format( "가장 큰 수 = {0}\n", nMax);
+
+        for( int i = 0; i < aOrder.Length; i++)
+        {
+            m_txtResult.text += aOrder[i] + ", ";
+        }
+
     }
 
-
+    // 3개중 가장 큰수 찾기
     public int FindMaxNumber(int a, int b, int c)
     {
-        int nMax = 0;
-        if( a > b) 
-        {
-            if (a > c)
-                nMax = a;
-            else
-                nMax = c;
-        }
-        else
-        {
-            if (b > c)
-                nMax = b;
-            else
-                nMax = c;
-        }
+        int nMax = a;
+
+        if (b > nMax)
+            nMax = b;
+
+        if (c > nMax)
+            nMax = c;
 
         return nMax;       
     }
+
+    // 큰수부터 정렬하기
+    public int[] OrderByLarge(int a, int b, int c)
+    {
+        int[] arr = new int[3] { a, b, c };
+        
+        for( int i = 0; i < arr.Length-1; i++)
+        {
+            for( int j = 1; j < arr.Length; j++)
+            {
+                if (arr[i] < arr[j])
+                {
+                    Swap( ref arr[i],  ref arr[j]);
+                }
+            }
+        }
+
+        return arr;
+    }
+
+
+    public void Swap( ref int a, ref int b)
+    {
+        int c = a;
+        a = b;
+        b = c;
+    }
+
 
     public void OnClicked_Clear()
     {
