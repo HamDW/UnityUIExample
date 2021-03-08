@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class TestCSV : MonoBehaviour
 {
+    [HideInInspector]public string m_String = "";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,7 @@ public class TestCSV : MonoBehaviour
 
     void ParserCSV()
     {
+        m_String = "";
 
          StreamReader sr = new StreamReader("Assets/Resources/Data/test.csv",System.Text.Encoding.UTF8);
 
@@ -41,6 +44,7 @@ public class TestCSV : MonoBehaviour
             for (int i = 0; i < data.Length; i++)
             {
                 Debug.Log(data[i]);
+                m_String += data[i] + " ";
             }
 
             //Console.WriteLine("{0}, {1}, {2}, ... ", data[0], data[1], data[2], ... );
