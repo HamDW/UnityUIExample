@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ [ 문제 ]: 
+3개의 정수를 입력받아 가장 큰 수를 출력하세요.
+
+[ 입력 ] 
+값은  0보다 크거나 같고, 100보다 작거나 같은 정수이다.
+  
+ */
+
 public class TestOrderDlg : MonoBehaviour
 {
     [SerializeField] Text m_txtResult = null;

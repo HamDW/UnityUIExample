@@ -4,6 +4,18 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/*
+ * 
+[ 문제 ]: 
+5개의 정수를 입력받아 리스트에 추가하고 작은 순서대로 정렬하여 출력한다.
+
+[ 입력 ] 
+값은  0보다 크거나 같고, 100보다 작거나 같은 정수이다.
+
+ * 
+ */
+
 public class TestList2Dlg : MonoBehaviour
 {
     [SerializeField] Text m_txtResult = null;
