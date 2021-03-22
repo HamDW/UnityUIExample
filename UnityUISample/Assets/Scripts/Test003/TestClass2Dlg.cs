@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -113,7 +114,6 @@ public class TestClass2Dlg : MonoBehaviour
             Monster kMon = m_listMonster[i];
             m_txtResult.text += string.Format("{0} Name={1}, HP={2}\n", i+1, kMon.m_Name, kMon.m_HP);
         }
-
     }
 
     public void OnClicked_Clear()
@@ -123,6 +123,61 @@ public class TestClass2Dlg : MonoBehaviour
         m_editName.text = "";
         m_editHP.text = "";
     }
+
+
+    public void OrderByAscending()
+    {
+        List<Monster> list = new List<Monster>();
+
+        for (int i = 0; i < m_listMonster.Count-1; i++)
+        {
+            Monster k1 = m_listMonster[i];
+            for( int j = 1; j < m_listMonster.Count; j++)
+            {
+                Monster k2 = m_listMonster[j];
+
+                if ( k1.m_HP > k2.m_HP )
+                    Swap<Monster>(ref k1, ref k2);
+            }
+        }
+    }
+
+    // 정렬 관련 함수들
+    public void OrderBy_Sort()
+    {
+        // 반환값없는 자체 정렬하기
+        m_listMonster.Sort((x1, x2) => {
+            return x1.m_HP.CompareTo(x2.m_HP);
+        });
+
+        m_listMonster.Sort((x1, x2) => x1.m_HP.CompareTo(x2.m_HP) );
+
+        // HP 순 오름차순 정렬하기
+        List<Monster> SortedList = m_listMonster.OrderBy(x => x.m_HP).ToList();
+
+        // HP 순 내림차순 정렬하기
+        List<Monster> SortedList2 = m_listMonster.OrderByDescending(x => x.m_HP).ToList();
+
+        // HP 순 이후에 Name 순으로 정렬하기
+        List<Monster> SortedList3 = m_listMonster.OrderBy(x => x.m_HP).ThenBy(x => x.m_Name).ToList();
+    }
+
+
+    public void OrderByDescending2()
+    {
+        m_listMonster.Sort((x1, x2) => x1.m_HP.CompareTo(x2.m_HP));
+    }
+
+
+    public void Swap<T>(ref T a, ref T b)
+    {
+        T c = a;
+        a = b;
+        b = c;
+    }
+
+
+
 
 
 }

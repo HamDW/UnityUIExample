@@ -97,6 +97,13 @@ public class TestOrderDlg : MonoBehaviour
     }
 
 
+    public void Swap<T>( ref T a, ref T b)
+    {
+        T c = a;
+        a = b;
+        b = c; 
+    }
+
     public void OnClicked_Clear()
     {
         m_txtResult.text = "";
