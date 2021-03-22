@@ -19,8 +19,8 @@ public class TestClassDlg : MonoBehaviour
 
     public void OnClicked_OK()
     {
-        TestClass();
-        //TestClass2();
+        //TestClass();
+        TestClass2();
         //TestLogic();
     }
 
@@ -68,33 +68,22 @@ public class TestClassDlg : MonoBehaviour
         m_txtResult.text = "";
 
         Animal kAnimal = null;
-
         Dog kDog = new Dog();
-        kDog.Initialize();
-        kDog.PrintName();
-        m_txtResult.text += string.Format("Name = {0}\n", kDog.m_Name);
+        m_txtResult.text += string.Format("{0}는 = {1}\n", kDog.m_Name, kDog.GetSound());
         m_txtResult.text += "-------------------------------\n";
 
         kAnimal = kDog;
-        kAnimal.PrintName();
-        m_txtResult.text += string.Format("Name = {0}\n", kAnimal.m_Name);
+        m_txtResult.text += string.Format("{0}는 = {1}\n", kAnimal.m_Name, kAnimal.GetSound());
 
         kAnimal.m_Name = "강아지 22";
-        kDog.PrintName();
         m_txtResult.text += string.Format("Name = {0}\n", kDog.m_Name);
 
-        kAnimal.PrintName();
         m_txtResult.text += string.Format("Name = {0}\n", kAnimal.m_Name);
         m_txtResult.text += "-------------------------------\n";
 
-        Cat kCat = new Cat();
-        kCat.Initialize();
-        kCat.PrintName();
-        m_txtResult.text += string.Format("Name = {0}\n", kCat.m_Name);
+        kAnimal = new Cat();
+        m_txtResult.text += string.Format("{0}는 = {1}\n", kAnimal.m_Name, kAnimal.GetSound());
 
-        kAnimal = kCat;
-        kAnimal.PrintName();
-        m_txtResult.text += string.Format("Name = {0}\n", kAnimal.m_Name);
         m_txtResult.text += "-------------------------------\n";
     }
 

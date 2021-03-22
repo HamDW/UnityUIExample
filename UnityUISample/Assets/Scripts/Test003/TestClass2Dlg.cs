@@ -27,6 +27,24 @@ public class Monster
         m_Name = sName;
         m_HP = nHP;
     }
+    public Monster( Monster k )
+    {
+        m_Name = k.m_Name;
+        m_HP = k.m_HP;
+    }
+
+    public void Set(string sName, int nHP)
+    {
+        m_Name = sName;
+        m_HP = nHP;
+    }
+    public void Set(Monster k)
+    {
+        m_Name = k.m_Name;
+        m_HP = k.m_HP;
+    }
+
+
 }
 
 public class Master
@@ -86,12 +104,13 @@ public class TestClass2Dlg : MonoBehaviour
         }
     }
 
-
     public void OnClicked_OK()
     {
         m_txtResult.text = "";
 
-        CalculateHP();
+        //CalculateHP();
+        OrderByAscending();
+        //OrderBy_Test();
         PrintResult();
     }
 
@@ -127,20 +146,30 @@ public class TestClass2Dlg : MonoBehaviour
 
     public void OrderByAscending()
     {
-        List<Monster> list = new List<Monster>();
-
         for (int i = 0; i < m_listMonster.Count-1; i++)
         {
             Monster k1 = m_listMonster[i];
-            for( int j = 1; j < m_listMonster.Count; j++)
+            for( int j = i; j < m_listMonster.Count; j++)
             {
                 Monster k2 = m_listMonster[j];
 
                 if ( k1.m_HP > k2.m_HP )
-                    Swap<Monster>(ref k1, ref k2);
+                    Swap(k1, k2);
             }
         }
     }
+
+    public void OrderBy_Test()
+    {
+        List<Monster> SortedList = m_listMonster.OrderBy(x => x.m_HP).ToList();
+
+        for (int i = 0; i < SortedList.Count; i++)
+        {
+            Monster kMon = SortedList[i];
+            m_txtResult.text += string.Format("{0} Name={1}, HP={2}\n", i + 1, kMon.m_Name, kMon.m_HP);
+        }
+    }
+
 
     // 정렬 관련 함수들
     public void OrderBy_Sort()
@@ -169,11 +198,11 @@ public class TestClass2Dlg : MonoBehaviour
     }
 
 
-    public void Swap<T>(ref T a, ref T b)
+    public void Swap(Monster a, Monster b)
     {
-        T c = a;
-        a = b;
-        b = c;
+        Monster c = new Monster(a);
+        a.Set(b);
+        b.Set(c);
     }
 
 
