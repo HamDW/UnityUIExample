@@ -81,13 +81,13 @@ public class Score082Dlg : MonoBehaviour
     {
         m_txtResult.text = "";
 
-        m_txtResult.text += "Name\t KOR\t ENG\t MAT\t TOT\t AVG\n";
-        m_txtResult.text += "==========================================\n";
+        m_txtResult.text += "[성적관리]\n";
+        m_txtResult.text += "===================================\n";
 
         for (int i = 0; i < m_listScore.Count; i++)
         {
             CScore sr = m_listScore[i];
-            m_txtResult.text += string.Format("{0}\t {1}\t {2}\t  {3}\t {4}\t {5:0.0} \n",
+            m_txtResult.text += string.Format("{0} : {1}, {2}, {3} : 합계={4}\t 평균={5:0.0} \n",
                                 sr.m_Name, sr.m_Kor, sr.m_Eng, sr.m_Mat, sr.GetTotal(), sr.GetAvg());
         }
     }
