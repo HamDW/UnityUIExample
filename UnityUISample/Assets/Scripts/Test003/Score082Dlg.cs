@@ -3,38 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CScore
-{
-    public string m_Name;
-    public int m_Kor;
-    public int m_Eng;
-    public int m_Mat;
 
-    public int GetTotal()
-    {
-        return m_Kor + m_Eng + m_Mat;
-    }
-
-    public float GetAvg()
-    {
-        return GetTotal() / 3;
-    }
-
-    public CScore( string name, int kor, int eng, int mat )
-    {
-        m_Name = name;
-        m_Kor = kor;
-        m_Mat = mat;
-        m_Eng = eng;
-    }
-    public CScore()
-    {
-
-    }
-}
 
 public class Score082Dlg : MonoBehaviour
 {
+    public class CScore
+    {
+        public string m_Name;
+        public int m_Kor;
+        public int m_Eng;
+        public int m_Mat;
+
+        public int Total()
+        {
+            return m_Kor + m_Eng + m_Mat;
+        }
+
+        public float Average()
+        {
+            return Total() / 3;
+        }
+
+        public CScore(string name, int kor, int eng, int mat)
+        {
+            m_Name = name;
+            m_Kor = kor;
+            m_Mat = mat;
+            m_Eng = eng;
+        }
+        public CScore()
+        {
+
+        }
+    }
+
     [SerializeField] Button m_btnOK = null;
     [SerializeField] Button m_btnClear = null;
     [SerializeField] Button m_btnAdd = null;
@@ -88,7 +90,7 @@ public class Score082Dlg : MonoBehaviour
         {
             CScore sr = m_listScore[i];
             m_txtResult.text += string.Format("{0} : {1}, {2}, {3} : 합계={4}\t 평균={5:0.0} \n",
-                                sr.m_Name, sr.m_Kor, sr.m_Eng, sr.m_Mat, sr.GetTotal(), sr.GetAvg());
+                                sr.m_Name, sr.m_Kor, sr.m_Eng, sr.m_Mat, sr.Total(), sr.Average());
         }
     }
 
