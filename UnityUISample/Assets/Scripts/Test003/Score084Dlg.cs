@@ -15,14 +15,17 @@ public class Score084Dlg : MonoBehaviour
         public int m_Eng = 0;
         public int m_Mat = 0;
 
-        public int Total()
-        {
-            return (m_Kor + m_Eng + m_Mat);
-        }
+        //public int Total()
+        //{
+        //    return (m_Kor + m_Eng + m_Mat);
+        //}
 
-        public float Average()
+        public int Total { get { return m_Kor + m_Eng + m_Mat; } }
+
+
+        public float Average
         {
-            return (float)Total() / 3;
+            get { return (float)Total / 3; }
         }
 
         public CScore(string name, int kor, int eng, int mat)
@@ -74,25 +77,33 @@ public class Score084Dlg : MonoBehaviour
 
     public void OnClicked_OK()
     {
-        OrderByAscending4();
-        PrintResult();
+        OrderByDescending();
+        //PrintResult();
+        PrintResult2();
         SaveFile();
     }
 
+    public void OrderByDescending()
+    {
+        m_listScore.Sort(delegate (CScore a, CScore b)
+        {
+            if (a.Total < b.Total) return 1;
+            else return -1;
+        });
+    }
     public void OrderByAscending()
     {
         m_listScore.Sort(delegate (CScore a, CScore b)
         {
-            if (a.Total() > b.Total()) return 1;
+            if (a.Total > b.Total) return 1;
             else return -1;
         });
     }
-
     public void OrderByAscending2()
     {
         m_listScore.Sort( (CScore a, CScore b) =>
         {
-            return a.Total().CompareTo(b.Total());
+            return a.Total.CompareTo(b.Total);      // a가 b보다 크면 1,작으면 -1, 같으면 0
         });
     }
 
@@ -100,18 +111,18 @@ public class Score084Dlg : MonoBehaviour
     {
         m_listScore.Sort((a, b) => 
         {
-            return a.Total().CompareTo(b.Total());
+            return a.Total.CompareTo(b.Total);
         });
     }
     public void OrderByAscending4()
     {
-        m_listScore.Sort((a, b) => a.Total().CompareTo(b.Total()) );
+        m_listScore.Sort((a, b) => a.Total.CompareTo(b.Total) );
     }
 
 
     public void OrderByAscending5()
     {
-        m_listScore.OrderBy((a) => a.Total() );
+        m_listScore.OrderBy((a) => a.Total );
     }
 
     
@@ -125,7 +136,7 @@ public class Score084Dlg : MonoBehaviour
         {
             CScore sr = m_listScore[i];
             m_txtResult.text += string.Format("{0}등 : {1}  {2}  {3}  {4} \t:합계={5}\t 평균={6:0.0} \n",
-                                i+1, sr.m_Name, sr.m_Kor, sr.m_Eng, sr.m_Mat, sr.Total(), sr.Average());
+                                i+1, sr.m_Name, sr.m_Kor, sr.m_Eng, sr.m_Mat, sr.Total, sr.Average);
         }
         m_txtResult.text += "===================================\n";
 
@@ -142,7 +153,7 @@ public class Score084Dlg : MonoBehaviour
                             nSumEng, (float)nSumEng / nCount,
                             nSumMat, (float)nSumMat / nCount);
     }
-
+    
     public void CalculateSum(out int sumKor, out int sumEng, out int sumMat)
     {
         int nSumK = 0, nSumE = 0, nSumM = 0;
@@ -158,6 +169,27 @@ public class Score084Dlg : MonoBehaviour
         sumEng = nSumE;
         sumMat = nSumM;
     }
+
+    public void PrintResult2()
+    {
+        m_txtResult.text = "";
+        m_txtResult.text = " Name kor Eng Mat   < 종합 >\n";
+        m_txtResult.text += "===================================\n";
+        for (int i = 0; i < m_listScore.Count; i++)
+        {
+            CScore sr = m_listScore[i];
+            string sKor = MakeGrade(sr.m_Kor);
+            string sEng = MakeGrade(sr.m_Eng);
+            string sMat = MakeGrade(sr.m_Mat);
+            string sAvg = MakeGrade((int)sr.Average);
+
+            m_txtResult.text += string.Format("{0}    {1}    {2}    {3}       < {4} >  \n",
+                                     sr.m_Name, sKor, sEng, sMat, sAvg );
+        }
+
+    }
+
+
 
     public void OnClicked_Load()
     {
@@ -186,10 +218,38 @@ public class Score084Dlg : MonoBehaviour
         m_InputMath.text = "";
     }
 
+    
+    public string MakeGrade(int nScore)
+    {
+        string sGrade = "";
+        if (nScore >= 90)
+        {
+            sGrade = "A";
+        }
+        else if (nScore >= 80)
+        {
+            sGrade = "B";
+        }
+        else if (nScore >= 70)
+        {
+            sGrade = "C";
+        }
+        else if (nScore >= 60)
+        {
+            sGrade = "D";
+        }
+        else
+        {
+            sGrade = "F";
+        }
+
+        return sGrade;
+    }
+
+
 
     public void SaveFile()
     {
-
         FileStream fs = new FileStream("Score.dat", FileMode.Create, FileAccess.Write);
         BinaryWriter bw = new BinaryWriter(fs);
 
