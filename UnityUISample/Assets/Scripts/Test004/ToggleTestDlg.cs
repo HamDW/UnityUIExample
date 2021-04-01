@@ -15,6 +15,10 @@ public class ToggleTestDlg : MonoBehaviour
     void Start()
     {
         m_btnResult.onClick.AddListener(OnClicked_Result);
+
+        m_toggleApple.onValueChanged.AddListener((isOn) => OnValueChanged_Value(0, isOn));
+        m_togglePear.onValueChanged.AddListener((isOn) => OnValueChanged_Value(1, isOn));
+        m_toggleOrange.onValueChanged.AddListener((isOn) => OnValueChanged_Value(2, isOn));
     }
 
 
@@ -39,8 +43,19 @@ public class ToggleTestDlg : MonoBehaviour
         m_txtResult.text = strResult;
     }
 
-    public void OnValueChanged_Value(int idx )
+    public void OnValueChanged_Value(int idx, bool isOn )
     {
+        string strValue = "";
+        if (isOn)
+        {
+            if (idx == 0)
+                strValue = "사과 ";
+            else if (idx == 1)
+                strValue = "배";
+            else
+                strValue = "오렌지";
+        }
+        m_txtResult.text = strValue;
 
     }
 
