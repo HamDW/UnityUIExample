@@ -10,36 +10,82 @@ using UnityEngine.UI;
 
 public class ToggleGroupTestDlg : MonoBehaviour
 {
+    static string[] DName = { "사과", "배", "오렌지" };
+
     [SerializeField] ToggleGroup m_ToggleGroup = null;
     [SerializeField] Text m_txtResult = null;
     [SerializeField] Button m_btnResult = null;
+    [SerializeField] Button m_btnClear = null;
+
+    [SerializeField] Toggle m_toggleApple = null;
+    [SerializeField] Toggle m_togglePear = null;
+    [SerializeField] Toggle m_toggleOrange = null;
+
+
     string m_sValue = "";
+
 
     // Start is called before the first frame update
     void Start()
     {
         m_btnResult.onClick.AddListener(OnClicked_Result);
-        m_sValue = "사과";
-    }
+        m_btnClear.onClick.AddListener(OnClicked_Clear);
+        m_sValue = DName[0];
 
+        m_toggleApple.onValueChanged.AddListener(OnValueChanged_Apple);
+        m_togglePear.onValueChanged.AddListener(OnValueChanged_Pear);
+        m_toggleOrange.onValueChanged.AddListener(OnValueChanged_Orange);
+    }
 
     public void OnClicked_Result()
     {
-        string strResult = "당신이 선택하 과일은 " + m_sValue + " 입니다.";
+        string strResult = "";
+        if (m_sValue.Equals(""))
+            strResult = "선택된 과일이 없습니다.";
+        else
+            strResult = "당신이 선택한 과일은 <color=#1CD9BA>" + m_sValue + "</color> 입니다.";
+        
         m_txtResult.text = strResult;
     }
 
-    public void OnChanged_Toggle(int iIndex)
+
+
+    //public void OnValueChanged_Value(int idx, bool isOn)
+    //{
+    //    m_sValue = DName[idx];
+    //    m_txtResult.text = m_sValue;
+
+    //}
+    public void OnValueChanged_Apple(bool isOn)
     {
-        string[] aName = {"사과", "배", "오렌지" };
-        m_sValue = aName[iIndex];
+        if (isOn)
+        {
+            m_sValue = DName[0];
+            m_txtResult.text = DName[0];
+        }
+    }
+    public void OnValueChanged_Pear(bool isOn)
+    {
+        if (isOn)
+        {
+            m_sValue = DName[1];
+            m_txtResult.text = DName[1];
+        }
+    }
+    public void OnValueChanged_Orange(bool isOn)
+    {
+        if (isOn)
+        {
+            m_sValue = DName[2];
+            m_txtResult.text = DName[2];
+        }
     }
 
     public void OnClicked_Clear()
     {
         m_ToggleGroup.SetAllTogglesOff();
         m_txtResult.text = "초기화 되었습니다.";
+        m_sValue = "";
     }
-
 
 }

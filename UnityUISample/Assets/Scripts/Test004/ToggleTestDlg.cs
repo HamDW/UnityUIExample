@@ -16,9 +16,9 @@ public class ToggleTestDlg : MonoBehaviour
     {
         m_btnResult.onClick.AddListener(OnClicked_Result);
 
-        m_toggleApple.onValueChanged.AddListener((isOn) => OnValueChanged_Value(0, isOn));
-        m_togglePear.onValueChanged.AddListener((isOn) => OnValueChanged_Value(1, isOn));
-        m_toggleOrange.onValueChanged.AddListener((isOn) => OnValueChanged_Value(2, isOn));
+        m_toggleApple.onValueChanged.AddListener(OnValueChanged_Apple);
+        m_togglePear.onValueChanged.AddListener(OnValueChanged_Pear);
+        m_toggleOrange.onValueChanged.AddListener(OnValueChanged_Orange);
     }
 
 
@@ -38,26 +38,57 @@ public class ToggleTestDlg : MonoBehaviour
             strValue += "오렌지 ";
         }
 
-        string strResult = "당신이 선택한 과일은 " + strValue + "입니다.";
+        string strResult = "";
+        if (strValue.Equals(""))
+        {
+            strResult = "당신이 선택한 과일은 없습니다.";
+        }
+        else
+        {
+            strResult = "당신이 선택한 과일은 <color=#FF8020>" + strValue + "</color>입니다.";
+        }
 
         m_txtResult.text = strResult;
     }
 
-    public void OnValueChanged_Value(int idx, bool isOn )
+    public void OnValueChanged_Apple(bool isOn)
     {
-        string strValue = "";
-        if (isOn)
-        {
-            if (idx == 0)
-                strValue = "사과 ";
-            else if (idx == 1)
-                strValue = "배";
-            else
-                strValue = "오렌지";
-        }
-        m_txtResult.text = strValue;
-
+        if( isOn )
+            m_txtResult.text = "사과";
+        else
+            m_txtResult.text = "";
     }
+    public void OnValueChanged_Pear(bool isOn)
+    {
+        if (isOn)
+            m_txtResult.text = "배";
+        else
+            m_txtResult.text = "";
+    }
+    public void OnValueChanged_Orange(bool isOn)
+    {
+        if (isOn)
+            m_txtResult.text = "오렌지";
+        else
+            m_txtResult.text = "";
+    }
+
+
+    //public void OnValueChanged_Value(int idx, bool isOn )
+    //{
+    //    string strValue = "";
+    //    if (isOn)
+    //    {
+    //        if (idx == 0)
+    //            strValue = "사과 ";
+    //        else if (idx == 1)
+    //            strValue = "배";
+    //        else
+    //            strValue = "오렌지";
+    //    }
+    //    m_txtResult.text = strValue;
+
+    //}
 
     public void OnClicked_Clear()
     {
