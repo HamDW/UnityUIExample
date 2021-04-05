@@ -20,8 +20,6 @@ public class ToggleGroupTestDlg : MonoBehaviour
     {
         m_btnResult.onClick.AddListener(OnClicked_Result);
         m_sValue = "사과";
-
-
     }
 
 
