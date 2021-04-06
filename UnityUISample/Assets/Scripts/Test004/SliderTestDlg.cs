@@ -34,7 +34,7 @@ public class SliderTestDlg : MonoBehaviour
     public void OnClicked_Result() {
 
         float fValue = m_sliderNum.value;
-        string strResult = "현재 진행된 값은 " + fValue + " 입니다.";
+        string strResult = "현재 진행된 값은 <color=#FAA500>" + fValue + "</color> 입니다.";
         m_txtResult.text = strResult;
 
     }

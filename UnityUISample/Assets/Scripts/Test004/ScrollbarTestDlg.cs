@@ -30,7 +30,7 @@ public class ScrollbarTestDlg : MonoBehaviour
     {
 
         float fValue = m_scrollbarNum.value;
-        string strResult = "현재 진행된 값은 " + fValue + " 입니다.";
+        string strResult = "현재 진행된 값은 <color=#FAA500>" + fValue + "</color> 입니다.";
         m_txtResult.text = strResult;
 
     }

@@ -16,16 +16,17 @@ public class DropdownTest2Dlg : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_Dropdown.onValueChanged.AddListener(delegate {
-            OnValueChanged_CityList(m_Dropdown);
-        });
+        //m_Dropdown.onValueChanged.AddListener(delegate (int pos) {
+        //    OnValueChanged_CityList(pos);
+        //});
+        m_Dropdown.onValueChanged.AddListener(OnValueChanged_CityList);
         m_btnResult.onClick.AddListener(OnClicked_Result);
         m_btnClear.onClick.AddListener(OnClicked_Clear);
 
-        Initialize1();
+        Initialize();
     }
 
-    private void Initialize1()
+    private void Initialize()
     {
         m_listData.Add("서울");
         m_listData.Add("광주");
@@ -36,9 +37,9 @@ public class DropdownTest2Dlg : MonoBehaviour
         m_Dropdown.AddOptions(m_listData);
     }
 
-    public void OnValueChanged_CityList(Dropdown kDropdown)
+    public void OnValueChanged_CityList(int nPos)
     {
-        int nPos = kDropdown.value;
+        //int nPos = kDropdown.value;
         string sCity = m_listData[nPos];
 
         m_txtResult.text = nPos + " : " + sCity;
@@ -49,7 +50,7 @@ public class DropdownTest2Dlg : MonoBehaviour
     {
         int nPos = m_Dropdown.value;
         string sCity = m_listData[nPos];
-        string sResult = "당신이 이동할 도시는 " + sCity + "입니다. ";
+        string sResult = "당신이 이동할 도시는 <color=#8BF65A>" + sCity + "</color>입니다. ";
         m_txtResult.text = sResult;
     }
 

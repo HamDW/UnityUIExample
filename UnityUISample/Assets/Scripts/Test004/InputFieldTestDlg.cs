@@ -14,8 +14,7 @@ public class InputFieldTestDlg : MonoBehaviour
     {
         m_btnStart.onClick.AddListener(OnClicked_Start); 
     }
-
- 
+     
     public void OnClicked_Start()
     {
         string sValue = m_InputName.text;
@@ -25,7 +24,7 @@ public class InputFieldTestDlg : MonoBehaviour
             return;
         }
 
-        string sRes = "당신이 입력한 이름은 " + "<color=#ff0000ff>" +sValue  +"</color>" + " 입니다.";
+        string sRes = "당신이 입력한 이름은 " + "<color=#FAA500>" + sValue  +"</color>" + " 입니다.";
         m_ResultText.text = sRes;
     }
 
