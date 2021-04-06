@@ -1,26 +1,24 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 /*
- * ìŠ¤í¬ë¡¤ë·° ë§Œë“¤ê¸°
+ * ½ºÅ©·Ñºä ¸¸µé±â
  * 
- * 1. ìŠ¤í¬ë¡¤ ë·°ì— ë“¤ì–´ê°ˆ ì•„ì´í…œ ì˜¤ë¸Œì íŠ¸( ItemSlot )ë¥¼ ë§Œë“ ë‹¤.  
- *    - ItemSlotì„ ë§Œë“¤ë•Œ ë°˜ë“œì‹œ Button ì»´í¬ë„ŒíŠ¸ë¥¼ ì¶”ê°€í•œë‹¤. ( Button í´ë˜ìŠ¤ë§Œ ì¶”ê°€ )
- * 2. ItemSlot ì˜¤ë¸Œì íŠ¸ë¥¼ ì»¨íŠ¸ë¡¤í•  í´ë˜ìŠ¤ (ItemSlot.cs )ë¥¼ ìƒì„±
- * 3. ItemSlot ì˜¤ë¸Œì íŠ¸ë¥¼ í”„ë¦¬íŒ¹ìœ¼ë¡œ ë§Œë“ ë‹¤.
- * 4. ì•„ì´í…œ ëª©ë¡ìœ¼ë¡œ ë“¤ì–´ê°ˆ ë„ì‹œì´ë¦„(string)ì„ ì„ì‹œë¡œ ë§Œë“ ë‹¤.
- * 5. List<ItemSlot>ì— ItemSlotì„ ìƒì„±í•˜ì—¬ ë„ì‹œì´ë¦„ë“¤ ê°¯ìˆ˜ë§Œí¼ ì¶”ê°€í•œë‹¤.
+ * 1. ½ºÅ©·Ñ ºä¿¡ µé¾î°¥ ¾ÆÀÌÅÛ ¿ÀºêÁ§Æ®( ItemSlot )¸¦ ¸¸µç´Ù.  
+ *    - ItemSlotÀ» ¸¸µé¶§ ¹İµå½Ã Button ÄÄÆ÷³ÍÆ®¸¦ Ãß°¡ÇÑ´Ù. ( Button Å¬·¡½º¸¸ Ãß°¡ )
+ * 2. ItemSlot ¿ÀºêÁ§Æ®¸¦ ÄÁÆ®·ÑÇÒ Å¬·¡½º (ItemSlot.cs )¸¦ »ı¼º
+ * 3. ItemSlot ¿ÀºêÁ§Æ®¸¦ ÇÁ¸®ÆÕÀ¸·Î ¸¸µç´Ù.
+ * 4. ¾ÆÀÌÅÛ ¸ñ·ÏÀ¸·Î µé¾î°¥ µµ½ÃÀÌ¸§(string)À» ÀÓ½Ã·Î ¸¸µç´Ù.
+ * 5. List<ItemSlot>¿¡ ItemSlotÀ» »ı¼ºÇÏ¿© µµ½ÃÀÌ¸§µé °¹¼ö¸¸Å­ Ãß°¡ÇÑ´Ù.
  * 
  */
 
-public class ScrollViewTestDlg : MonoBehaviour
+public class ScrollViewTest2Dlg : MonoBehaviour
 {
-    
-    public static string[] cCityList = { "ì„œìš¸", "ê´‘ì£¼", "ëŒ€ì „", "ë¶€ì‚°", "ì „ì£¼", "ëŒ€êµ¬", "ì¸ì²œ" };
-    [SerializeField] ScrollRect m_ScrollRect = null;    // ìŠ¤í¬ë¡¤ë·° ì»´í¬ë„ŒíŠ¸
+    public static string[] cCityList = { "¼­¿ï", "±¤ÁÖ", "´ëÀü", "ºÎ»ê", "ÀüÁÖ", "´ë±¸", "ÀÎÃµ" };
+    [SerializeField] ScrollRect m_ScrollRect = null;    // ½ºÅ©·Ñºä ÄÄÆ÷³ÍÆ®
     [SerializeField] Text m_txtResult = null;
     [SerializeField] Button m_btnResult = null;
     [SerializeField] Button m_btnClear = null;
@@ -42,7 +40,7 @@ public class ScrollViewTestDlg : MonoBehaviour
         //    OnValueChanged_CityList(value);
         //});
 
-        //Initialize();
+        Initialize();
     }
 
 
@@ -51,14 +49,14 @@ public class ScrollViewTestDlg : MonoBehaviour
     {
         m_listItem.Clear();
 
-        for( int i = 0; i < cCityList.Length; i++ )
+        for (int i = 0; i < cCityList.Length; i++)
         {
             GameObject go = Instantiate(m_prefabItem, m_ScrollRect.content) as GameObject;
             ItemSlot kItem = go.GetComponent<ItemSlot>();
 
-            kItem.transform.localScale = new Vector3(1, 1, 1);  // ë°˜ë“œì‹œ í• ê²ƒ
+            kItem.transform.localScale = new Vector3(1, 1, 1);  // ¹İµå½Ã ÇÒ°Í
             kItem.Initialize(i, cCityList[i]);
-            
+
             Button btn = kItem.GetComponent<Button>();
             int idx = i;
             btn.onClick.AddListener(() => {
@@ -67,7 +65,7 @@ public class ScrollViewTestDlg : MonoBehaviour
 
             m_listItem.Add(kItem);
         }
-        
+
     }
 
     public void OnClicked_SelectItem(int iIndex)
@@ -78,14 +76,14 @@ public class ScrollViewTestDlg : MonoBehaviour
 
         m_iSelectIndex = iIndex;
         m_txtResult.text = cCityList[iIndex];
-        
+
         string sLog = string.Format(" Select Index = {0}", iIndex);
         Debug.Log(sLog);
     }
 
     public void ClearAllSelectedItem()
     {
-        for( int i = 0; i < m_listItem.Count; i++ )
+        for (int i = 0; i < m_listItem.Count; i++)
         {
             m_listItem[i].SetSelect(false);
         }
@@ -102,13 +100,13 @@ public class ScrollViewTestDlg : MonoBehaviour
     {
         //int nPos = m_Dropdown.value;
         string sCity = cCityList[m_iSelectIndex];
-        string sResult = "ë‹¹ì‹ ì´ ì´ë™í•  ë„ì‹œëŠ” <color=#73F804>" + sCity + "</color> ì…ë‹ˆë‹¤. ";
+        string sResult = "´ç½ÅÀÌ ÀÌµ¿ÇÒ µµ½Ã´Â <color=#73F804>" + sCity + "</color> ÀÔ´Ï´Ù. ";
         m_txtResult.text = sResult;
     }
 
     public void OnClicked_Clear()
     {
-        m_txtResult.text = "ì´ˆê¸°í™” ëìŠµë‹ˆë‹¤.";
+        m_txtResult.text = "ÃÊ±âÈ­ µÆ½À´Ï´Ù.";
         m_iSelectIndex = 0;
         ClearAllSelectedItem();
     }
