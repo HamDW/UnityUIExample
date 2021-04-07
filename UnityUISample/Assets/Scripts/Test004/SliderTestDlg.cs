@@ -10,7 +10,7 @@ public class SliderTestDlg : MonoBehaviour
     [SerializeField] Button m_btnResult = null;
     [SerializeField] Slider m_sliderNum = null;
 
-    [SerializeField] int m_MinValue = 0;        // 초기값 설정 연습
+    [SerializeField] int m_MinValue = 0;            // 초기값 설정 연습
     [SerializeField] int m_MaxValue = 1;
 
 
@@ -18,17 +18,16 @@ public class SliderTestDlg : MonoBehaviour
     void Start()
     {
         m_btnResult.onClick.AddListener(OnClicked_Result);
+        m_sliderNum.onValueChanged.AddListener(OnValueChanged_SliderNumber);
 
         m_sliderNum.minValue = m_MinValue;
         m_sliderNum.maxValue = m_MaxValue;
         m_sliderNum.value = 0;
     }
       
-    public void OnValueChanged_SliderNumber()
+    public void OnValueChanged_SliderNumber(float pos)
     {
-        string strValue = "" + m_sliderNum.value;
-        
-        m_txtResult.text = strValue;
+        m_txtResult.text = pos.ToString();
     }
 
     public void OnClicked_Result() {
@@ -36,7 +35,6 @@ public class SliderTestDlg : MonoBehaviour
         float fValue = m_sliderNum.value;
         string strResult = "현재 진행된 값은 <color=#FAA500>" + fValue + "</color> 입니다.";
         m_txtResult.text = strResult;
-
     }
 
     public void OnClicked_Clear()
