@@ -4,14 +4,17 @@ using System.Net.Http.Headers;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ *  참고) OnValueChanged_SliderNumber을 인스펙터창에 직접 넣어 사용할경우에는
+ *        함수인자 없이 사용하면 가능하다. 
+ *        - position값은 m_sliderNum.value를 직접 이용하면 됨
+ * 
+ */
 public class SliderTestDlg : MonoBehaviour
 {
     [SerializeField] Text m_txtResult = null;
     [SerializeField] Button m_btnResult = null;
     [SerializeField] Slider m_sliderNum = null;
-
-    [SerializeField] int m_MinValue = 0;            // 초기값 설정 연습
-    [SerializeField] int m_MaxValue = 1;
 
 
     // Start is called before the first frame update
@@ -19,9 +22,6 @@ public class SliderTestDlg : MonoBehaviour
     {
         m_btnResult.onClick.AddListener(OnClicked_Result);
         m_sliderNum.onValueChanged.AddListener(OnValueChanged_SliderNumber);
-
-        m_sliderNum.minValue = m_MinValue;
-        m_sliderNum.maxValue = m_MaxValue;
         m_sliderNum.value = 0;
     }
       
@@ -43,5 +43,13 @@ public class SliderTestDlg : MonoBehaviour
         m_sliderNum.value = 0;
     }
 
+
+
+    // 이렇게 사용해도 됨 
+    // ( 인스펙터창의 Slider의 onValueChanged에  함수를 직접 추가하여 사용할경우 )
+    public void OnValueChanged_Slider()
+    {
+        m_txtResult.text = m_sliderNum.value.ToString();
+    }
 
 }

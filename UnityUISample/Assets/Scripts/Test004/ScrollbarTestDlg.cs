@@ -15,15 +15,34 @@ public class ScrollbarTestDlg : MonoBehaviour
     void Start()
     {
         m_btnResult.onClick.AddListener(OnClicked_Result);
+        m_scrollbarNum.onValueChanged.AddListener( OnValueChanged_Scrollbar );
         
-        //m_scrollbarNum.onValueChanged.AddListener( delegate { OnValueChanged_Scrollbar(); });
+        // 같은 내용임.
+        //m_scrollbarNum.onValueChanged.AddListener(delegate( float pos) {
+        //    OnValueChanged_Scrollbar(pos);
+        //});
+
+        //m_scrollbarNum.onValueChanged.AddListener((float pos)=> {
+        //    OnValueChanged_Scrollbar(pos);
+        //});
+
+        //m_scrollbarNum.onValueChanged.AddListener((pos) => {
+        //    OnValueChanged_Scrollbar(pos);
+        //});
+
+        //m_scrollbarNum.onValueChanged.AddListener((pos) => OnValueChanged_Scrollbar(pos) );
+
     }
 
-    public void OnValueChanged_Scrollbar()
+    public void OnValueChanged_Scrollbar(float pos)
     {
-        string strValue = "" + m_scrollbarNum.value;
+        m_txtResult.text = pos.ToString();
+    }
 
-        m_txtResult.text = strValue;
+    // 인스펙터창에 직접 넣어서 사용할경우에 사용
+    public void OnValueChanged_Scrollbar2()
+    {
+        m_txtResult.text = m_scrollbarNum.value.ToString();
     }
 
     public void OnClicked_Result()
