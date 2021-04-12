@@ -11,12 +11,13 @@ public class ScrollbarTestDlg : MonoBehaviour
     [SerializeField] Scrollbar m_scrollbarNum = null;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
         m_btnResult.onClick.AddListener(OnClicked_Result);
         m_scrollbarNum.onValueChanged.AddListener( OnValueChanged_Scrollbar );
-        
+
         // 같은 내용임.
         //m_scrollbarNum.onValueChanged.AddListener(delegate( float pos) {
         //    OnValueChanged_Scrollbar(pos);
@@ -32,6 +33,7 @@ public class ScrollbarTestDlg : MonoBehaviour
 
         //m_scrollbarNum.onValueChanged.AddListener((pos) => OnValueChanged_Scrollbar(pos) );
 
+   
     }
 
     public void OnValueChanged_Scrollbar(float pos)
@@ -59,4 +61,7 @@ public class ScrollbarTestDlg : MonoBehaviour
         m_txtResult.text = "초기화 되었습니다.";
         m_scrollbarNum.value = 0;
     }
+
+
 }
+

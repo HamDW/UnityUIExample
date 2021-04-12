@@ -14,6 +14,10 @@ public class DropdownTestDlg : MonoBehaviour
 
     List<string> m_listData = new List<string>();
 
+    Vector3 m_vPos = Vector3.zero;
+    public float m_Speed = 1.0f;
+    RectTransform m_rectTransform = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +40,9 @@ public class DropdownTestDlg : MonoBehaviour
             Dropdown.OptionData kData = m_Dropdown.options[i];
             m_listData.Add(kData.text);
         }
+
+        m_rectTransform = GetComponent<RectTransform>();
+        m_vPos = m_rectTransform.position;
     }
 
 
@@ -58,6 +65,18 @@ public class DropdownTestDlg : MonoBehaviour
     {
         m_txtResult.text = "초기화 됐습니다.";
         m_Dropdown.value = 0;
+    }
+    void Update()
+    {
+        float fH = m_rectTransform.rect.height / 2;
+        m_vPos.y -= Time.deltaTime * m_Speed * 100;
+        if (m_vPos.y <= fH )
+        {
+            m_vPos.y = fH - 20;
+        }
+
+        this.m_rectTransform.position = m_vPos;
+
     }
 
 }
