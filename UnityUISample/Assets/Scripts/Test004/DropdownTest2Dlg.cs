@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class DropdownTest2Dlg : MonoBehaviour
 {
-    //public static string[] cCityList = { "서울", "광주", "대전", "부산", "전주" };
+
     [SerializeField] Dropdown m_Dropdown = null;
     [SerializeField] Text m_txtResult = null;
     [SerializeField] Button m_btnResult = null;
