@@ -14,9 +14,8 @@ public class DropdownTestDlg : MonoBehaviour
 
     List<string> m_listData = new List<string>();
 
-    Vector3 m_vPos = Vector3.zero;
+    Vector3 m_vPos = Vector3.zero;      // 주의) 반드시 localPosition기준으로 체크해야 한다.
     public float m_Speed = 1.0f;
-    RectTransform m_rectTransform = null;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +28,12 @@ public class DropdownTestDlg : MonoBehaviour
         //m_Dropdown.onValueChanged.AddListener( delegate (int pos) {
         //    OnValueChanged_CityList(pos);
         //});
+        //m_Dropdown.onValueChanged.AddListener((int pos)=>{
+        //    OnValueChanged_CityList(pos);
+        //});
+
+        //m_Dropdown.onValueChanged.AddListener((pos) => OnValueChanged_CityList(pos) );
+
 
         Initialize();
     }
@@ -41,8 +46,7 @@ public class DropdownTestDlg : MonoBehaviour
             m_listData.Add(kData.text);
         }
 
-        m_rectTransform = GetComponent<RectTransform>();
-        m_vPos = m_rectTransform.position;
+        m_vPos = this.transform.localPosition; // m_rectTransform.position;
     }
 
 
@@ -68,15 +72,16 @@ public class DropdownTestDlg : MonoBehaviour
     }
     void Update()
     {
-        float fH = m_rectTransform.rect.height / 2;
+        Move_ToDown();
+    }
+
+    public void Move_ToDown()
+    {
         m_vPos.y -= Time.deltaTime * m_Speed * 100;
-        if (m_vPos.y <= fH )
-        {
-            m_vPos.y = fH - 20;
+        if (m_vPos.y <= 0.0f){
+            m_vPos.y = 0.0f;
         }
-
-        this.m_rectTransform.position = m_vPos;
-
+        this.transform.localPosition = m_vPos;
     }
 
 }
