@@ -6,25 +6,12 @@ using UnityEngine.UI;
 
 public class DropdownTestDlg : MonoBehaviour
 {
-    //public static string[] cCityList = { "서울", "광주", "대전", "부산", "전주" };
     [SerializeField] Dropdown m_Dropdown = null;
     [SerializeField] Text m_txtResult = null;
     [SerializeField] Button m_btnResult = null;
     [SerializeField] Button m_btnClear = null;
 
-    public float m_yOffset = 430;
-    public float m_xOffset = 620;
-
     List<string> m_listData = new List<string>();
-
-
-    Vector3 m_vPos = Vector3.zero;      // 주의) 반드시 localPosition기준으로 체크해야 한다.
-    public float m_Speed = 1.0f;
-
-    bool m_bLeft = false;
-    bool m_bRight = false;
-    bool m_bUp = false;
-    bool m_bDown = false;
 
 
     // Start is called before the first frame update
@@ -32,7 +19,6 @@ public class DropdownTestDlg : MonoBehaviour
     {
         m_btnResult.onClick.AddListener(OnClicked_Result);
         m_btnClear.onClick.AddListener(OnClicked_Clear);
-
         m_Dropdown.onValueChanged.AddListener(OnValueChanged_CityList);
 
         //m_Dropdown.onValueChanged.AddListener( delegate (int pos) {
@@ -44,7 +30,6 @@ public class DropdownTestDlg : MonoBehaviour
 
         //m_Dropdown.onValueChanged.AddListener((pos) => OnValueChanged_CityList(pos) );
 
-
         Initialize();
     }
 
@@ -55,8 +40,6 @@ public class DropdownTestDlg : MonoBehaviour
             Dropdown.OptionData kData = m_Dropdown.options[i];
             m_listData.Add(kData.text);
         }
-
-        m_vPos = this.transform.localPosition; // m_rectTransform.position;
     }
 
 
@@ -83,106 +66,37 @@ public class DropdownTestDlg : MonoBehaviour
     void Update()
     {
         Update_Key();
-        Move_ToDown();
         Move_ToUp();
-        Move_ToRight();
-        Move_ToLeft();
     }
 
-    public void Move_ToDown()
-    {
-        if (!m_bDown) return;
-
-        m_vPos.y -= Time.deltaTime * m_Speed * 100;
-        if (m_vPos.y <= 0.0f){
-            m_vPos.y = 0.0f;
-        }
-        this.transform.localPosition = m_vPos;
-    }
 
     public void Move_ToUp()
     {
-        if (!m_bUp) return;
-
-        m_vPos.y += Time.deltaTime * m_Speed * 100;
-        if (m_vPos.y >= 0.0f)
-        {
-            m_vPos.y = 0.0f;
+        Vector3 vPos = transform.localPosition;
+        vPos.y += Time.deltaTime * 200;
+        if (vPos.y >= 0.0f){
+            vPos.y = 0.0f;
         }
-        this.transform.localPosition = m_vPos;
+        this.transform.localPosition = vPos; // 주의) 반드시 localPosition기준으로 체크해야 한다.
     }
 
-    public void Move_ToRight()
+    // 위와 같은 결과
+    public void Move_ToUp2()
     {
-        if (!m_bRight) return;
-
-        m_vPos.x += Time.deltaTime * m_Speed * 100;
-        if (m_vPos.x >= 0.0f)
-        {
-            m_vPos.x = 0.0f;
-        }
-        this.transform.localPosition = m_vPos;
+        this.transform.localPosition += Vector3.up * Time.deltaTime * 200;
+        if (transform.localPosition.y > 0.0f)
+            transform.localPosition = Vector3.zero;
     }
-
-    public void Move_ToLeft()
-    {
-        if (!m_bLeft) return;
-
-        m_vPos.x -= Time.deltaTime * m_Speed * 100;
-        if (m_vPos.x <= 0.0f)
-        {
-            m_vPos.x = 0.0f;
-        }
-        this.transform.localPosition = m_vPos;
-    }
-
 
     public void Update_Key()
     {
         // down -> Up 
         if ( Input.GetKeyDown(KeyCode.W))
         {
-            ClearKey();
-            m_vPos = this.transform.localPosition;
-            m_vPos.y = -m_yOffset;
-            this.transform.localPosition = m_vPos;
-            m_bUp = true;
+            transform.localPosition = new Vector3(0, -400, 0);
         }
-        // Up -> down  
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            ClearKey();
-            m_vPos = this.transform.localPosition;
-            m_vPos.y = m_yOffset;
-            this.transform.localPosition = m_vPos;
-            m_bDown = true;
-        }
-        // Right -> Left
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            ClearKey();
-            m_vPos = this.transform.localPosition;
-            m_vPos.x = m_xOffset;
-            this.transform.localPosition = m_vPos;
-            m_bLeft = true;
-        }
-        // Left -> Right
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            ClearKey();
-            m_vPos = this.transform.localPosition;
-            m_vPos.x = -m_xOffset;
-            this.transform.localPosition = m_vPos;
-            m_bRight = true;
-        }
+
     }
 
-    public void ClearKey()
-    {
-        m_bLeft = false;
-        m_bRight = false;
-        m_bUp = false;
-        m_bDown = false;
-    }
 
 }
