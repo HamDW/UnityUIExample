@@ -12,10 +12,20 @@ public class DropdownTestDlg : MonoBehaviour
     [SerializeField] Button m_btnResult = null;
     [SerializeField] Button m_btnClear = null;
 
+    public float m_yOffset = 430;
+    public float m_xOffset = 620;
+
     List<string> m_listData = new List<string>();
+
 
     Vector3 m_vPos = Vector3.zero;      // 주의) 반드시 localPosition기준으로 체크해야 한다.
     public float m_Speed = 1.0f;
+
+    bool m_bLeft = false;
+    bool m_bRight = false;
+    bool m_bUp = false;
+    bool m_bDown = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -72,16 +82,107 @@ public class DropdownTestDlg : MonoBehaviour
     }
     void Update()
     {
+        Update_Key();
         Move_ToDown();
+        Move_ToUp();
+        Move_ToRight();
+        Move_ToLeft();
     }
 
     public void Move_ToDown()
     {
+        if (!m_bDown) return;
+
         m_vPos.y -= Time.deltaTime * m_Speed * 100;
         if (m_vPos.y <= 0.0f){
             m_vPos.y = 0.0f;
         }
         this.transform.localPosition = m_vPos;
+    }
+
+    public void Move_ToUp()
+    {
+        if (!m_bUp) return;
+
+        m_vPos.y += Time.deltaTime * m_Speed * 100;
+        if (m_vPos.y >= 0.0f)
+        {
+            m_vPos.y = 0.0f;
+        }
+        this.transform.localPosition = m_vPos;
+    }
+
+    public void Move_ToRight()
+    {
+        if (!m_bRight) return;
+
+        m_vPos.x += Time.deltaTime * m_Speed * 100;
+        if (m_vPos.x >= 0.0f)
+        {
+            m_vPos.x = 0.0f;
+        }
+        this.transform.localPosition = m_vPos;
+    }
+
+    public void Move_ToLeft()
+    {
+        if (!m_bLeft) return;
+
+        m_vPos.x -= Time.deltaTime * m_Speed * 100;
+        if (m_vPos.x <= 0.0f)
+        {
+            m_vPos.x = 0.0f;
+        }
+        this.transform.localPosition = m_vPos;
+    }
+
+
+    public void Update_Key()
+    {
+        // down -> Up 
+        if ( Input.GetKeyDown(KeyCode.W))
+        {
+            ClearKey();
+            m_vPos = this.transform.localPosition;
+            m_vPos.y = -m_yOffset;
+            this.transform.localPosition = m_vPos;
+            m_bUp = true;
+        }
+        // Up -> down  
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            ClearKey();
+            m_vPos = this.transform.localPosition;
+            m_vPos.y = m_yOffset;
+            this.transform.localPosition = m_vPos;
+            m_bDown = true;
+        }
+        // Right -> Left
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            ClearKey();
+            m_vPos = this.transform.localPosition;
+            m_vPos.x = m_xOffset;
+            this.transform.localPosition = m_vPos;
+            m_bLeft = true;
+        }
+        // Left -> Right
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            ClearKey();
+            m_vPos = this.transform.localPosition;
+            m_vPos.x = -m_xOffset;
+            this.transform.localPosition = m_vPos;
+            m_bRight = true;
+        }
+    }
+
+    public void ClearKey()
+    {
+        m_bLeft = false;
+        m_bRight = false;
+        m_bUp = false;
+        m_bDown = false;
     }
 
 }
