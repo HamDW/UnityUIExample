@@ -18,8 +18,8 @@ using UnityEngine.UI;
 
 public class ScrollViewTestDlg : MonoBehaviour
 {
+    public static string[] cAnimalList = { "토끼", "호랑이", "사자", "강아지", "고양이", "너구리", "개구리" };
     
-    public static string[] cCityList = { "토끼", "호랑이", "사자", "강아지", "고양이", "너구리", "개구리" };
     [SerializeField] ScrollRect m_ScrollRect = null;    // 스크롤뷰 컴포넌트
     [SerializeField] Text m_txtResult = null;
     [SerializeField] Button m_btnResult = null;
@@ -36,29 +36,20 @@ public class ScrollViewTestDlg : MonoBehaviour
     {
         m_btnResult.onClick.AddListener(OnClicked_Result);
         m_btnClear.onClick.AddListener(OnClicked_Clear);
-
-        m_ScrollRect.onValueChanged.AddListener((Vector2 value) =>
-        {
-            OnValueChanged_CityList(value);
-        });
-
         Initialize();
-    }
 
+        //m_ScrollRect.onValueChanged.AddListener((Vector2 value) => OnValueChanged_CityList(value) );
+    }
 
 
     public void Initialize()
     {
         m_listItem.Clear();
 
-        for( int i = 0; i < cCityList.Length; i++ )
+        for( int i = 0; i < cAnimalList.Length; i++ )
         {
-            GameObject go = Instantiate(m_prefabItem, m_ScrollRect.content) as GameObject;
-            ItemText kItem = go.GetComponent<ItemText>();
+            ItemText kItem = CreateItem(i);
 
-            kItem.transform.localScale = new Vector3(1, 1, 1);  // 반드시 할것
-            kItem.Initialize(i, cCityList[i]);
-            
             Button btn = kItem.GetComponent<Button>();
             int idx = i;
             btn.onClick.AddListener(() => {
@@ -67,7 +58,17 @@ public class ScrollViewTestDlg : MonoBehaviour
 
             m_listItem.Add(kItem);
         }
-        
+    }
+
+    public ItemText CreateItem( int idx )
+    {
+        GameObject go = Instantiate(m_prefabItem, m_ScrollRect.content);
+        ItemText kItem = go.GetComponent<ItemText>();
+
+        kItem.transform.localScale = new Vector3(1, 1, 1);  // 반드시 할것
+        kItem.Initialize(idx, cAnimalList[idx]);
+
+        return kItem;
     }
 
     public void OnClicked_SelectItem(int iIndex)
@@ -77,10 +78,9 @@ public class ScrollViewTestDlg : MonoBehaviour
         kItem.SetSelect(true);
 
         m_iSelectIndex = iIndex;
-        m_txtResult.text = cCityList[iIndex];
-        
-        string sLog = string.Format(" Select Index = {0}", iIndex);
-        Debug.Log(sLog);
+        m_txtResult.text = cAnimalList[iIndex];
+
+        Debug.LogFormat(" Select Index = {0}", iIndex);
     }
 
     public void ClearAllSelectedItem()
@@ -91,17 +91,10 @@ public class ScrollViewTestDlg : MonoBehaviour
         }
     }
 
-    // value : 가로 세로 스크롤 position ( 0 ~ 1 )값
-    public void OnValueChanged_CityList(Vector2 value)
-    {
-        Debug.Log("Scroll Pos = " + value.x + ", " + value.y);
-    }
-
 
     public void OnClicked_Result()
     {
-        //int nPos = m_Dropdown.value;
-        string sCity = cCityList[m_iSelectIndex];
+        string sCity = cAnimalList[m_iSelectIndex];
         string sResult = "당신이 선택한 동물은 <color=#73F804>" + sCity + "</color> 입니다. ";
         m_txtResult.text = sResult;
     }
@@ -112,4 +105,12 @@ public class ScrollViewTestDlg : MonoBehaviour
         m_iSelectIndex = 0;
         ClearAllSelectedItem();
     }
+
+
+    //// value : 가로 세로 스크롤 position ( 0 ~ 1 )값
+    //public void OnValueChanged_CityList(Vector2 value)
+    //{
+    //    Debug.Log("Scroll Pos = " + value.x + ", " + value.y);
+    //}
+
 }

@@ -6,38 +6,20 @@ using UnityEngine.UI;
 public class ItemText : MonoBehaviour
 {
     public int m_Index = 0;
-    private bool m_bSelected = false;
-
-    public Text m_txtCity = null;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Text m_txtName = null;
 
     public void Initialize(int idx, string sName)
     {
         m_Index = idx;
-        m_txtCity.text = sName;
+        m_txtName.text = sName;
     }
-
-    public void SetBgColor(Color color)
-    {
-        m_txtCity.color = color;
-    }
-
 
     public void SetSelect(bool bSelect)
     {
-        m_bSelected = bSelect;
-
-        if (m_bSelected)
-            SetBgColor(new Color32(50, 207, 76, 255));
+        if (bSelect)
+            m_txtName.color = new Color32(50, 207, 76, 255);
         else
-            SetBgColor(Color.white);
-
+            m_txtName.color = Color.white;
     }
-
 
 }

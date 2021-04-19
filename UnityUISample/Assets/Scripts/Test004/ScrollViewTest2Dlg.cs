@@ -35,14 +35,10 @@ public class ScrollViewTest2Dlg : MonoBehaviour
         m_btnResult.onClick.AddListener(OnClicked_Result);
         m_btnClear.onClick.AddListener(OnClicked_Clear);
 
-        //m_ScrollRect.onValueChanged.AddListener((Vector2 value) =>
-        //{
-        //    OnValueChanged_CityList(value);
-        //});
-
         Initialize();
-    }
 
+        //m_ScrollRect.onValueChanged.AddListener((Vector2 value) => OnValueChanged_CityList(value) );
+    }
 
 
     public void Initialize()
@@ -51,11 +47,7 @@ public class ScrollViewTest2Dlg : MonoBehaviour
 
         for (int i = 0; i < cCityList.Length; i++)
         {
-            GameObject go = Instantiate(m_prefabItem, m_ScrollRect.content) as GameObject;
-            ItemSlot kItem = go.GetComponent<ItemSlot>();
-
-            kItem.transform.localScale = new Vector3(1, 1, 1);  // 반드시 할것
-            kItem.Initialize(i, cCityList[i]);
+            ItemSlot kItem = CreateItem(i);
 
             Button btn = kItem.GetComponent<Button>();
             int idx = i;
@@ -65,7 +57,17 @@ public class ScrollViewTest2Dlg : MonoBehaviour
 
             m_listItem.Add(kItem);
         }
+    }
 
+    public ItemSlot CreateItem(int idx)
+    {
+        GameObject go = Instantiate(m_prefabItem, m_ScrollRect.content);
+        ItemSlot kItem = go.GetComponent<ItemSlot>();
+
+        kItem.transform.localScale = new Vector3(1, 1, 1);  // 반드시 할것
+        kItem.Initialize(idx, cCityList[idx]);
+
+        return kItem;
     }
 
     public void OnClicked_SelectItem(int iIndex)
@@ -77,8 +79,7 @@ public class ScrollViewTest2Dlg : MonoBehaviour
         m_iSelectIndex = iIndex;
         m_txtResult.text = cCityList[iIndex];
 
-        string sLog = string.Format(" Select Index = {0}", iIndex);
-        Debug.Log(sLog);
+        Debug.LogFormat(" Select Index = {0}", iIndex);
     }
 
     public void ClearAllSelectedItem()
@@ -88,13 +89,6 @@ public class ScrollViewTest2Dlg : MonoBehaviour
             m_listItem[i].SetSelect(false);
         }
     }
-
-
-    //public void OnValueChanged_CityList(Vector2 value)
-    //{
-    //    //Debug.Log("Scroll Pos = " + value.x + ", " + value.y);
-    //}
-
 
     public void OnClicked_Result()
     {
@@ -110,4 +104,10 @@ public class ScrollViewTest2Dlg : MonoBehaviour
         m_iSelectIndex = 0;
         ClearAllSelectedItem();
     }
+
+
+    //public void OnValueChanged_CityList(Vector2 value)
+    //{
+    //    //Debug.Log("Scroll Pos = " + value.x + ", " + value.y);
+    //}
 }

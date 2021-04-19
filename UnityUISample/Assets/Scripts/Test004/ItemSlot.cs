@@ -8,13 +8,6 @@ public class ItemSlot : MonoBehaviour
     public int m_Index = 0;
     [SerializeField] Image m_imgIcon = null;
     [SerializeField] Text m_txtName = null;
-    private bool m_bSelected = false;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
 
     public void Initialize( int idx, string sName)
@@ -37,9 +30,7 @@ public class ItemSlot : MonoBehaviour
 
     public void SetSelect( bool bSelect )
     {
-        m_bSelected = bSelect;
-
-        if (m_bSelected)
+        if (bSelect)
             SetBgColor( new Color32(50, 207, 76, 255));
         else
             SetBgColor(Color.white);
