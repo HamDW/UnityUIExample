@@ -37,8 +37,6 @@ public class ScrollViewTestDlg : MonoBehaviour
         m_btnResult.onClick.AddListener(OnClicked_Result);
         m_btnClear.onClick.AddListener(OnClicked_Clear);
         Initialize();
-
-        //m_ScrollRect.onValueChanged.AddListener((Vector2 value) => OnValueChanged_CityList(value) );
     }
 
 

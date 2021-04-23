@@ -17,7 +17,7 @@ public class ItemText : MonoBehaviour
     public void SetSelect(bool bSelect)
     {
         if (bSelect)
-            m_txtName.color = new Color32(50, 207, 76, 255);
+            m_txtName.color = new Color32(250, 50, 16, 255);
         else
             m_txtName.color = Color.white;
     }
