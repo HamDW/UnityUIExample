@@ -50,8 +50,9 @@ public class ScrollViewTestDlg : MonoBehaviour
 
             Button btn = kItem.GetComponent<Button>();
             int idx = i;
-            btn.onClick.AddListener(() => {
-                OnClicked_SelectItem(idx); 
+            btn.onClick.AddListener(() =>
+            {
+                OnClicked_SelectItem(idx);
             });
 
             m_listItem.Add(kItem);

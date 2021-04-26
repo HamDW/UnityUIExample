@@ -242,7 +242,6 @@ public class Score084Dlg : MonoBehaviour
         {
             sGrade = "F";
         }
-
         return sGrade;
     }
 
