@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class CScoreMgrUI : MonoBehaviour
 {
+    [SerializeField] InputField m_InputNo = null;
     [SerializeField] InputField m_InputName = null;
     [SerializeField] InputField m_InputKor = null;
     [SerializeField] InputField m_InputEng = null;
@@ -27,6 +28,7 @@ public class CScoreMgrUI : MonoBehaviour
     private CScoreInfo m_kScoreInfo = new CScoreInfo();
 
     private int m_iSelect = -1;
+    private CScoreItemUI m_kCurItemUI = null;
 
     // Start is called before the first frame update
     void Start()
@@ -48,16 +50,25 @@ public class CScoreMgrUI : MonoBehaviour
 
     }
 
+    public void ClearInput()
+    {
+        m_InputNo.text = "";
+        m_InputName.text = "";
+        m_InputKor.text = "";
+        m_InputMath.text = "";
+        m_InputEng.text = "";
+    }
 
     public void OnClicked_Add()
     {
+        int nNo = int.Parse(m_InputNo.text); 
         string sName =  m_InputName.text;
         int nKor = int.Parse(m_InputKor.text);
         int nMath = int.Parse(m_InputMath.text);
         int nEng = int.Parse(m_InputEng.text);
 
-        CScoreInfo.CScore kScore = m_kScoreInfo.AddItem(sName, nKor, nEng, nMath);
-        CScoreItemUI kItemUI = CreateItemUI(kScore);
+        CScoreInfo.CScore kScore = m_kScoreInfo.AddItem(nNo, sName, nKor, nEng, nMath);
+        CScoreItemUI kItemUI = CreateItemUI( kScore);
         m_listItem.Add(kItemUI);
     }
 
@@ -69,51 +80,53 @@ public class CScoreMgrUI : MonoBehaviour
         kItemUI.Initialize(kScore);
 
         Button btn = go.GetComponent<Button>();
-        btn.onClick.AddListener(() => OnSelectedItem(kScore));
+        btn.onClick.AddListener(() => OnSelectedItem(go, kScore));
 
         return kItemUI;
     }
 
 
-    public void OnSelectedItem(CScoreInfo.CScore kScore)
+    public void OnSelectedItem(GameObject go, CScoreInfo.CScore kScore)
     {
-        if( m_iSelect > 0 )
-            m_listItem[m_iSelect - 1].SetSelectd(false);
+        if (m_kCurItemUI != null)
+            m_kCurItemUI.SetSelectd(false);
 
+        m_InputNo.text = kScore.m_No.ToString();
         m_InputName.text = kScore.m_Name;
         m_InputKor.text = kScore.m_Kor.ToString();
         m_InputMath.text = kScore.m_Mat.ToString();
         m_InputEng.text = kScore.m_Eng.ToString();
 
-        m_iSelect = kScore.m_idx;
-
-
-        m_listItem[m_iSelect-1].SetSelectd(true);
+        m_kCurItemUI = go.GetComponent<CScoreItemUI>();     
+        m_kCurItemUI.SetSelectd(true);
     }
 
 
     public void OnClicked_Repair()
     {
+        int nNo = int.Parse(m_InputNo.text);
         string sName = m_InputName.text;
         int nKor = int.Parse(m_InputKor.text);
         int nMath = int.Parse(m_InputMath.text);
         int nEng = int.Parse(m_InputEng.text);
 
-        CScoreInfo.CScore kScore = m_kScoreInfo.Repair(m_iSelect, sName, nKor, nEng, nMath);
-
-        CScoreItemUI kItemUI = m_listItem[m_iSelect-1];
-        kItemUI.Initialize(kScore);
+        CScoreInfo.CScore kScore = m_kScoreInfo.Repair(nNo, sName, nKor, nEng, nMath);
+        if( m_kCurItemUI != null)
+        {
+            m_kCurItemUI.Initialize(kScore);
+        }
     }
 
     public void OnClicked_Delete()
     {
-        CScoreInfo.CScore kScore =  m_kScoreInfo.GetScore(m_iSelect);
+        CScoreInfo.CScore kScore =  m_kScoreInfo.FindScore(m_kCurItemUI.GetNumber());
         if( kScore != null)
         {
             m_kScoreInfo.RemoveItem( kScore.m_Name );
-            m_listItem.RemoveAt(m_iSelect-1);
+            m_listItem.Remove(m_kCurItemUI);
             
-            Destroy(m_listItem[m_iSelect-1].gameObject);
+            Destroy(m_kCurItemUI.gameObject);
+            m_kCurItemUI = null;
         }
     }
 
@@ -124,7 +137,15 @@ public class CScoreMgrUI : MonoBehaviour
 
     public void OnClicked_Clear()
     {
+        for( int i = 0; i < m_listItem.Count; i++)
+        {
+            Destroy(m_listItem[i].gameObject);
+        }
+        
         m_listItem.Clear();
+        m_kScoreInfo.Clear();
+        m_kCurItemUI = null;
+        ClearInput();
     }
 
     public void OnClicked_Load()

@@ -16,7 +16,7 @@ public class CScoreItemUI : MonoBehaviour
 
     public void Initialize(CScoreInfo.CScore kScore)
     {
-        m_txtNo.text = kScore.m_idx.ToString();
+        m_txtNo.text = kScore.m_No.ToString();
         m_txtName.text = kScore.m_Name;
         m_txtKor.text = kScore.m_Kor.ToString();
         m_txtMath.text = kScore.m_Mat.ToString();
@@ -25,12 +25,15 @@ public class CScoreItemUI : MonoBehaviour
         m_txtAvg.text = string.Format("{0:0.00}", kScore.Average);
     }
 
-
+    public int GetNumber()
+    {
+        return int.Parse(m_txtNo.text);
+    }
     public void SetSelectd( bool bSelect )
     {
         if (bSelect)
         {
-            SetBgColor(new Color32(50, 255, 50, 255));
+            SetBgColor(new Color32(153, 255, 153, 255));
         }
         else
         {
