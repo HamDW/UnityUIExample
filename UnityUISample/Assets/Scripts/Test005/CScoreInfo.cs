@@ -73,6 +73,9 @@ public class CScoreInfo
     public CScore Repair( int nNo, string name, int kor, int eng, int mat )
     {
         CScore kScore = FindScore(nNo);
+        if (kScore == null)
+            kScore = FindScore(name);
+
         if (kScore != null)
         {
             kScore.m_No = nNo;
@@ -83,12 +86,17 @@ public class CScoreInfo
 
             return kScore;
         }
+        
         return null;
     }
 
     public CScore FindScore( int nNo )
     {
-       return m_listScore.Find((x) => x.m_No == nNo);
+       return m_listScore.Find( x => x.m_No == nNo);
+    }
+    public CScore FindScore( string name)
+    {
+        return m_listScore.Find(x => x.m_Name.Equals(name));
     }
 
     public void Clear()
