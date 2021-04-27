@@ -60,14 +60,6 @@ public class CScoreInfo
         if (kScore != null)
             m_listScore.Remove(kScore);
 
-        //for( int i = 0; i < m_listScore.Count; i++)
-        //{
-        //    if( m_listScore[i].m_Name.Equals(name))
-        //    {
-        //        m_listScore.RemoveAt(i);
-        //        break;
-        //    }
-        //}
     }
 
     public CScore Repair( int nNo, string name, int kor, int eng, int mat )

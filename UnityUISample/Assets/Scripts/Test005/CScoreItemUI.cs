@@ -41,13 +41,15 @@ public class CScoreItemUI : MonoBehaviour
         }
     }
 
-
     public void SetBgColor(Color color)
     {
         Image kImage = GetComponent<Image>();
         kImage.color = color;
     }
 
+    public float Height { get { return GetComponent<RectTransform>().rect.height; } }
+
+    public float Width { get { return GetComponent<RectTransform>().rect.width; } }
 
 
 }
