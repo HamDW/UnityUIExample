@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ *  수동으로 리사이클러뷰와 같은 스크롤뷰 만들기
+ *    - 작업 완료 안됨 ( 더 작업해야 함 )
+ *    - 동작 안됨.
+ */
 public class CListViewPool : MonoBehaviour
 {
     public int m_maxPool = 6;
@@ -30,6 +35,15 @@ public class CListViewPool : MonoBehaviour
             GameObject go = Instantiate<GameObject>(m_prefabItem, m_ScrollRect.content);
             go.name = i.ToString();
             go.transform.localScale = new Vector3(1, 1, 1);
+            
+            RectTransform rt = go.GetComponent<RectTransform>();
+            rt.anchorMin = new Vector2(0.5f, 0.5f);
+            rt.anchorMax = new Vector2(0.5f, 0.5f);
+            rt.pivot = new Vector2(0.5f, 0.5f); 
+            float h = GetItemHeight(go);
+
+            go.transform.localPosition = new Vector3(0, -(i * h) - h * 0.5f, 0);
+            
             go.SetActive(false);
             m_Pools.Add(go);
         }
@@ -41,7 +55,12 @@ public class CListViewPool : MonoBehaviour
         if (go != null)
         {
             go.SetActive(true);
+
             return go;
+        }
+        else
+        {
+
         }
         return null;
     }
