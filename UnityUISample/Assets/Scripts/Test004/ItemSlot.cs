@@ -10,6 +10,12 @@ public class ItemSlot : MonoBehaviour
     [SerializeField] Text m_txtName = null;
 
 
+    private void Start()
+    {
+        // 이미지 로딩 예)
+        //m_imgIcon.sprite = Resources.Load<Sprite>("Textures/Backdrop");
+    }
+
     public void Initialize( int idx, string sName)
     {
         m_Index = idx;
@@ -24,7 +30,12 @@ public class ItemSlot : MonoBehaviour
 
     public void SetImage(string sName)
     {
-        m_imgIcon.sprite = Resources.Load("Textures/" + sName) as Sprite;
+        //주의) Sprite는 반드시 이렇게 Load<Sprite>를 사용해야 로딩할수 있다.
+        m_imgIcon.sprite = Resources.Load<Sprite>("Textures/" + sName);
+
+        //아래쪽은 2가지 모두 로딩 실패한다.
+        //m_imgIcon.sprite = Resources.Load("Textures/" + sName) as Sprite;
+        //m_imgIcon.sprite = (Sprite)Resources.Load("Textures/" + sName);
     }
 
 
@@ -34,7 +45,6 @@ public class ItemSlot : MonoBehaviour
             SetBgColor( new Color32(50, 207, 76, 255));
         else
             SetBgColor(Color.white);
-
     }    
 
 

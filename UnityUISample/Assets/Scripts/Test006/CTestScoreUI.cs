@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/*
+ *  수동으로 리사이클러뷰와 같은 스크롤뷰 만들기
+ *    - 작업 완료 안됨 ( 더 작업해야 함 )
+ *    - 동작 안됨.
+ */
 public class CTestScoreUI : MonoBehaviour
 {
     [SerializeField] InputField m_InputNo = null;
